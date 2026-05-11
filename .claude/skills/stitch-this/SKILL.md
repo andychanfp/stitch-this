@@ -6,6 +6,7 @@ required-tools:
   - AskUserQuestion
   - Bash
   - Read
+  - Write
   - mcp__plugin_figma_figma__get_design_context
   - mcp__stitch__list_projects
   - mcp__stitch__get_project
@@ -51,6 +52,7 @@ This skill calls the following tools. Each must be available at runtime.
 | `AskUserQuestion` | Steps 1, 2, 7, 10 | Gate (when no inline input), input gate, approval gate, and follow-up gate |
 | `Bash` | Step 3 | Discover glossary.json files under refs/ |
 | `Read` | Steps 2, 3 | Load `.md` / `.json` files and glossary + image files |
+| `Write` | Step 7 | Create `prompt.md` with raw input and optimised prompt inside `stitch-[n]/` |
 | `mcp__plugin_figma_figma__get_design_context` | Step 2 | Fetch structured design context from a Figma URL |
 | `mcp__stitch__list_projects` | Step 8 | Pick a project when none provided |
 | `mcp__stitch__get_project` | Step 8 | Resolve project context |
@@ -80,7 +82,7 @@ Emit `Step X/10 — <message>` only for steps marked **emit**. Steps marked **si
 
 **Pre-step — Capture inline input**
 On invocation, check whether the user passed any text after the command (one-line or multi-line).
-- If yes: store as `inline_input`. Set `mode = generate` and `intent = new`. Skip Step 1 and proceed directly to Step 2.
+- If yes: store as `inline_input` and `raw_input = inline_input`. Set `mode = generate` and `intent = new`. Skip Step 1 and proceed directly to Step 2.
 - If no: `inline_input` is empty. Continue to Step 1.
 
 **Step 1 — Gate** *(skip if inline_input is present)*
@@ -100,11 +102,11 @@ Otherwise, ask the user via `AskUserQuestion` (multiSelect): "What is your idea?
 3. Figma URL — paste a `figma.com` design link
 4. Image — attach a screenshot or mockup
 
-Wait for the answer, then parse each selected input type:
-- `text`: extract the six fields directly from the message.
-- `md`: read the file with `Read`, then extract the six fields.
-- `figma_url`: extract `fileKey` and `nodeId` from the URL (convert `-` to `:` in nodeId), call `mcp__plugin_figma_figma__get_design_context`, then extract the six fields from the response. Treat the design as a reference — extract intent, do not copy layout verbatim.
-- `image`: attach or reference the image file path. Read it with `Read`. Visually analyze to infer the six fields. Treat as reference — extract intent, tone, and component patterns without copying layouts verbatim.
+Wait for the answer, then parse each selected input type. Before parsing, store the verbatim user input as `raw_input`:
+- `text`: `raw_input` = the user's typed text. Extract the six fields directly from the message.
+- `md`: `raw_input` = the file path + raw file content. Read the file with `Read`, then extract the six fields.
+- `figma_url`: `raw_input` = the Figma URL. Extract `fileKey` and `nodeId` from the URL (convert `-` to `:` in nodeId), call `mcp__plugin_figma_figma__get_design_context`, then extract the six fields from the response. Treat the design as a reference — extract intent, do not copy layout verbatim.
+- `image`: `raw_input` = the image file path. Read it with `Read`. Visually analyze to infer the six fields. Treat as reference — extract intent, tone, and component patterns without copying layouts verbatim.
 
 Merge across all selected inputs without duplication. Produce `parsed_brief`: a structured record with these six fields: feature name, screen context, components, user actions, tone, device target.
 
@@ -142,9 +144,29 @@ Apply the UI-intent checklist in `refs/prompt-guide.md` to `optimised_prompt`. P
 **Step 7 — Approval gate**
 Show `optimised_prompt` to the user in a copyable code block. Ask via `AskUserQuestion`: (1) Approve, (2) Edit prompt, (3) Abort. On Edit: accept the user's revision, re-run Step 5 sanitization on it, return to this gate. On Abort: exit. On Approve: continue.
 
-- **If mode = prompt:** Display this message and exit:
-  > Great! Copy and paste the prompt above to [Google Stitch studio](https://stitch.withgoogle.com). Note: references are not copied. You have to upload your references manually.
+- **If mode = prompt:** Run the artifact-saving protocol below, then display the exit message and stop.
 - **If mode = generate:** Continue to Step 8.
+
+**Artifact-saving protocol** *(mode = prompt only, runs after user approval)*
+
+1. **Ensure `stitches/` exists:** Run via Bash: `[ -d stitches ] || mkdir stitches`. Silent.
+2. **Determine next index:** Run via Bash: `ls -d stitches/stitch-*/ 2>/dev/null | wc -l | tr -d ' '`. The next `n` is that count + 1. Store as `stitch_n`.
+3. **Create directory structure:** Run via Bash: `mkdir -p stitches/stitch-${stitch_n}/benchmarking stitches/stitch-${stitch_n}/pandora`. Silent.
+4. **Write `prompt.md`:** Use `Write` to create `stitches/stitch-${stitch_n}/prompt.md` with this exact structure:
+   ```
+   ## Raw Input
+
+   <raw_input verbatim>
+
+   ## Optimised Prompt
+
+   <optimised_prompt verbatim>
+   ```
+5. **Copy refs:** For each path in `pandora_refs`, run via Bash: `cp "<path>" "stitches/stitch-${stitch_n}/pandora/"`. For each path in `benchmarking_refs`, run via Bash: `cp "<path>" "stitches/stitch-${stitch_n}/benchmarking/"`. If either list is empty, skip silently — do not create empty dirs or error.
+6. **Emit:** `Saved to stitches/stitch-${stitch_n}/` followed by a tree summary listing all files written (prompt.md, and any copied refs by folder).
+
+Then display this exit message:
+> Great! Copy and paste the prompt above to [Google Stitch studio](https://stitch.withgoogle.com). Your refs have been saved to `stitches/stitch-${stitch_n}/` — upload the files in `pandora/` and `benchmarking/` manually as references in Stitch.
 
 **Step 8 — Call Stitch MCP** *(mode = generate only)*
 Follow `refs/stitch-tools.md` for tool selection, param shapes, and model selection rules. Branch on `intent`:
