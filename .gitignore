@@ -1,0 +1,5 @@
+*.local
+*.local.json
+*plan.md
+plan
+.DS_Store

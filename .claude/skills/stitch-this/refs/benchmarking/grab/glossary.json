@@ -1,0 +1,9 @@
+{
+  "refs": [
+    {
+      "tags": ["subscription", "enrolment", "enrollment", "pro", "onboarding", "sign up", "join"],
+      "path": "refs/benchmarking/grab/enrolment-home.png",
+      "description": "Grab subscription enrolment home screen — entry point showing subscription value proposition and CTA"
+    }
+  ]
+}
