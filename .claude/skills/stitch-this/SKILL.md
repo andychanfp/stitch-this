@@ -67,10 +67,13 @@ Show `optimised_prompt` in a code block. Ask: Approve / Edit / Abort.
   - If not, ask via `AskUserQuestion`: "Where should I save this?" — Current folder (`<CWD>`) / Desktop (`~/Desktop`) / Custom path. On Custom: ask user to type the path.
   - Then run:
     ```
-    bash scripts/save-stitch.sh "$save_dir" "$optimised_prompt"       "<pandora_refs csv>" "<benchmarking_refs csv>"
+    bash scripts/save-stitch.sh new "$save_dir" "$optimised_prompt" \
+      "<pandora_refs csv>" "<benchmarking_refs csv>" "<extra_refs csv>"
     ```
-  - Emit script output, then:
+    Capture the `STITCH_DIR=<path>` line from script output and store as `stitch_dir` for this session.
+  - Emit script output (excluding the `STITCH_DIR=` line), then:
     > Copy the prompt above into [Google Stitch studio](https://stitch.withgoogle.com). Upload the files in `pandora/` and `benchmarking/` manually as references in Stitch.
+  Stop.
 - Approve, user chose option 1 or 2 → continue to Step 6.
 
 ### **Step 6 — Call Stitch MCP**
@@ -87,10 +90,18 @@ Ask: "What's next?"
 2. Deep dive → ask which screen (by ID or title), then run Step 6 as if user chose option 2 with that screen
 3. End session → terminate here
 
-### **Step 9 — Refine** *(deep dive only)*
-Ask via `AskUserQuestion` (multiSelect): "How would you like to refine this screen?" — Text direction / Image reference / `.md` file. 
+### **Step 9 — Refine (deep dive only)**
+Ask via `AskUserQuestion` (multiSelect): "How would you like to refine this screen?" — Text direction / Image reference / `.md` file. Allow skip.
  
-Parse all selected inputs per `refs/input-parsing.md`. Merge into `parsed_brief`, overriding any conflicting fields with the new input. Then run Step 4 → Step 5 → Step 6 → Step 7 with the selected screen as `selectedScreenIds`.
+Parse all selected inputs per `refs/input-parsing.md`. Classify each image or file ref:
+- Matches a path under `refs/pandora/` or `refs/benchmarking/` → route to `pandora_refs` or `benchmarking_refs` accordingly
+- Anything else (user-supplied file or image) → route to `extra_refs`
+Merge parsed inputs into `parsed_brief`, overriding conflicting fields. Re-run Step 4 to produce `refinement_prompt`. Then run:
+```
+bash scripts/save-stitch.sh refine "$stitch_dir" "$refinement_prompt" \
+  "<pandora_refs csv>" "<benchmarking_refs csv>" "<extra_refs csv>"
+```
+Emit script output. Then run Step 6 → Step 7 with the selected screen as `selectedScreenIds`.
 
 ## References
 
