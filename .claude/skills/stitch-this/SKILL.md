@@ -1,6 +1,6 @@
 ---
 name: stitch-this
-description: Accepts single-line text, .md briefs, or JSON specs; synthesizes and sanitizes a Stitch-compatible prompt; gates on user approval; then calls the Stitch MCP to generate screen variations. Invoke when the user wants to create or vary a UI screen in Stitch from any of these input formats.
+description: Synthesizes a Stitch-compatible prompt from text, .md briefs, or images; gates on user approval; optionally generates screen variations via Stitch MCP.
 model: claude-sonnet-4-6
 required-tools:
   - AskUserQuestion
@@ -18,12 +18,10 @@ required-tools:
 
 # Stitch-this
 
-## Purpose
-Parses and interviews user input to develop interaction and UI ideas. Outputs an optimised prompt with ready-to-copy references from a memory layer for Google Stitch Studio as a directory in `/stitch-[n]`.
-
 ## Usage
 
-**Invoke**: `/stitch-this [idea]` or when user asks to create a Google Stitch prompt. Store input in `[idea]` as `inline_input`.
+`/stitch-this [idea]` — inline text sets mode = generate, intent = new and skips Step 1.
+
 
 ## Protocol
 
