@@ -16,61 +16,48 @@ required-tools:
   - mcp__stitch__generate_variants
 ---
 
+# Stitch-this
+
+## Purpose
+Parses and interviews user input to develop interaction and UI ideas. Outputs an optimised prompt with ready-to-copy references from a memory layer for Google Stitch Studio as a directory in `/stitch-[n]`.
+
 ## Usage
 
-**Invoke**: `/stitch-this [idea]` — optionally pass a one-line or multi-line description inline.
+**Invoke**: `/stitch-this [idea]` or when user asks to create a Google Stitch prompt. Store input in `[idea]` as `inline_input`.
 
-- `/stitch-this` with no input → asks what you'd like to do (merged gate)
-- `/stitch-this build a food ordering screen` → captures input, proceeds directly to parse
-- Natural-language: "generate a Stitch screen", "create Stitch variations", "build a screen in Stitch"
+## Protocol
 
-## Outputs
+### **Step 1 - Capture intent** *(model: Haiku)*
+Emit `Step 1/10 - checking objective...`
 
-| Name | Format | Destination |
-|------|--------|-------------|
-| optimised prompt | text string shown at approval gate | inline in conversation |
-| screen variations | Stitch MCP response | inline in conversation |
-| screen links | URL or resource path per screen | inline in conversation |
+Ask user via `AskUserQuestion`: "What would you like to generate?" with options:
+1. An optimised Stitch prompt only — I'll synthesize your brief and extract benchmarking and Pandora references into a ready-to-use Stitch prompt → `mode = prompt`
+2. A new screen in Stitch — I'll build actual screens in Stitch from your brief, which you can later find on the Stitch web app → `mode = generate`, `intent = variations`
+3. Variations of existing screen(s) in Stitch — I'll generate variants of a screen you already have, which you can later find on the Stitch web app → `mode = generate`, `intent = new`
 
-## Progress emission
+### **Step 2 - Capture input type** *(skip if `inline_input` is present)* *(model: Sonnet)*
+Emit `Step 2/10 - checking for input...`
 
-Emit `Step X/10 — <message>` at steps 1, 2, 3, 7, 8, 9, 10. All other steps are silent.
+Ask user via `AskUserQuestion` (multiSelect): "What would you to generate from?" 
+1. Text description - single-line input
+2. A .md file - from a directory or raw .md file
+3. Image references - from a directory or a single image file
 
-| Step | Message |
-|------|---------|
-| 1 | figuring out what you'd like to do... |
-| 2 | gathering your inputs... |
-| 3 | finding visual references... |
-| 7 | ready for your review... |
-| 8 | generating your screens... |
-| 9 | here are your variations... |
-| 10 | what would you like to do next? |
+Parse selected input type(s) per `refs/input-guide.md`. Generate `parsed_brief` with the six fields defined there. `
 
-## Step-by-step protocol
+### **Step 3 - Capture additional input** *(model: Sonnet)*
+Emit `Step 3/10 - checking if you have any other references...`
 
-**Pre-step — Capture inline input**
-On invocation, check whether the user passed any text after the command (one-line or multi-line).
-- If yes: store as `inline_input` and `raw_input = inline_input`. Set `mode = generate` and `intent = new`. Skip Step 1 and proceed directly to Step 2.
-- If no: `inline_input` is empty. Continue to Step 1.
+Ask user via `AskUserQuestion` (multiSelect): "You have entered an idea. Do you want to add more details?" 
+1. Revise my initial input
+2. Add a .md file
+3. Add image references
 
-**Step 1 — Gate** *(skip if inline_input is present)*
-Ask the user via `AskUserQuestion`: "What would you like to do?" with options:
-1. Generate a new screen — I'll build actual screens in Stitch from your brief
-2. Explore variations of an existing screen — I'll generate variants of a screen you already have
-3. Generate a prompt only — I'll synthesize your brief into a ready-to-use Stitch prompt, no generation
+Parse selected input type(s) per `refs/input-guide.md`. Generate `parsed_brief` with the six fields defined there. `
 
-Store: option 1 → `mode = generate`, `intent = new`; option 2 → `mode = generate`, `intent = variations`; option 3 → `mode = prompt`. Wait for the answer before continuing.
+### **Step 4 - Search, extract, resolve refs** *(model: Sonnet)*
+Emit `Step 4/10 - checking memory for references`
 
-**Step 2 — Parse inputs**
-Ask the user via `AskUserQuestion` (multiSelect): "What is your idea?" with options:
-1. Text description — a free-form one-liner or paragraph
-2. `.md` brief — attach or reference a Markdown file
-3. Figma URL — paste a `figma.com` design link
-4. Image — attach a screenshot or mockup
-
-Parse each selected input type per `refs/input-parsing.md`. Produce `parsed_brief` with the six fields defined there.
-
-**Step 3 — Resolve refs**
 Silently discover and load reference images that match the parsed brief.
 
 1. Run via Bash: `find .claude/skills/stitch-this/refs -name "glossary.json"` to locate all glossary files under `refs/benchmarking/` and `refs/pandora/`.
@@ -88,22 +75,26 @@ Silently discover and load reference images that match the parsed brief.
    - From `benchmarking_refs`: extract ideas, patterns, or differentiators that complement or contrast with the pandora reference. Store as `benchmarking_context`.
 7. If no pandora match is found, proceed without `pandora_context` — do not block.
 
-**Step 4 — Validate input** *(silent)*
-Check `parsed_brief` is non-empty. At minimum, `feature_name` or `screen_context` must be present. If empty or unparseable, refuse with: "I can't read this input — please provide a brief that names what screen you want." Exit.
+### **Step 5 — Optimise prompt** *(silent)*
+Emit `Step 5/10 - optimising your prompt`
 
-**Step 5 — Optimise prompt** *(silent)*
 Follow `refs/prompt-guide.md`. Build the prompt from `parsed_brief` using the canonical Stitch structure: `[screen name] for [context]. Shows [components]. Tone: [tone]. Device: [device].`
 
 If `pandora_context` exists, extend the prompt with a `Style:` clause that describes the visual standard extracted from pandora in precise UI terms — layout structure, key component placement, color tone, spacing rhythm. This clause forces Stitch to reproduce the pandora visual language, not invent its own. Example: `Style: single-column card layout, hero banner at top with gradient overlay, CTA pinned to bottom, muted purple palette.`
 
 Strip non-UI content, vague qualifiers, and backend logic per the sanitization checklist. Produce `optimised_prompt`.
 
-**Step 6 — Validate UI intent** *(silent)*
+### **Step 6 — Validate UI intent** *(silent)*
+Emit `Step 6/10 - grading the optimised prompt`
 Apply the UI-intent checklist in `refs/prompt-guide.md` to `optimised_prompt`. Pass requires ≥3 yes answers. If the prompt fails, refuse with: "This input describes [observed thing], not a UI screen — please provide a screen description." Exit.
 
-**Step 7 — Approval gate**
-Show `optimised_prompt` to the user in a copyable code block. Ask via `AskUserQuestion`: (1) Approve, (2) Edit prompt, (3) Abort. On Edit: accept the user's revision, re-run Step 5 sanitization on it, return to this gate. On Abort: exit. On Approve: continue.
+### **Step 7 — Approval gate**
+Emit `Step 7/10 - prompt needs approval`
 
+Show `optimised_prompt` to the user in a copyable code block. Ask via `AskUserQuestion`: (1) Approve, (2) Edit prompt, (3) Abort. 
+- On Edit: accept the user's revision, re-run Step 5 sanitization on it, return to this gate. 
+- On Abort: exit. 
+- On Approve: continue.
 - **If mode = prompt:** Run the artifact-saving protocol below, then display the exit message and stop.
 - **If mode = generate:** Continue to Step 8.
 
@@ -129,6 +120,7 @@ Then display this exit message:
 > Great! Copy and paste the prompt above to [Google Stitch studio](https://stitch.withgoogle.com). Your refs have been saved to `stitches/stitch-${stitch_n}/` — upload the files in `pandora/` and `benchmarking/` manually as references in Stitch.
 
 **Step 8 — Call Stitch MCP** *(mode = generate only)*
+Emit `Step 8/10 - calling Stitch MCP...`
 Follow `refs/stitch-tools.md` for tool selection, param shapes, and model selection rules. Branch on `intent`:
 - `intent = new` → call `mcp__stitch__generate_screen_from_text`, then `mcp__stitch__generate_variants` on the resulting screen
 - `intent = variations` → call `mcp__stitch__generate_variants` directly with `variantOptions`
@@ -137,12 +129,14 @@ Pass `deviceType` if inferable from `optimised_prompt` (mobile/desktop/tablet). 
 
 **Variant fidelity defaults:** Default `creativeRange` to `REFINE` and `aspects` to `["COLOR_SCHEME", "TEXT_CONTENT", "IMAGES"]`. Never include `LAYOUT` in aspects by default — this preserves the base screen's structure. Only add `LAYOUT` to aspects if the user explicitly asks for layout changes (e.g. "try a different layout", "restructure the screen"). Only use `creativeRange: "EXPLORE"` or `"REIMAGINE"` when the user explicitly requests it.
 
-**Step 9 — Present variations** *(mode = generate only)*
+### **Step 9 — Present variations** *(mode = generate only)*
+Emit `Step 9/10 - variations generated!`
 Show every generated screen variation inline. Include each variation's screen ID and a one-line description. Show all variations — do not summarise.
 
 For each screen, call `mcp__stitch__get_screen` using the full resource name (`projects/{projectId}/screens/{screenId}`). From the response, emit a link: if the response includes a URL, render it as a markdown link. If not, show the resource path (`projects/{projectId}/screens/{screenId}`) so the user can locate the screen in their Stitch project.
 
-**Step 10 — Follow-up gate**
+### **Step 10 — Follow-up gate**
+Emit `Step 10/10 - session complete`
 Ask the user via `AskUserQuestion`: "What would you like to do next?" with options:
 1. Regenerate — go back to Step 1 with a clean slate
 2. Deep dive into one screen *(mode = generate only)* — ask which screen (by ID or title from Step 9), then jump directly to Step 8 with `intent = variations` and that screen as `selectedScreenIds`; skip Steps 1–7
@@ -150,7 +144,7 @@ Ask the user via `AskUserQuestion`: "What would you like to do next?" with optio
 
 ## References
 
-- `refs/input-parsing.md` — How to parse each input type and extract the six parsed_brief fields
-- `refs/stitch-tools.md` — Stitch MCP tool names, params, model selection rules, and tool-selection rules
+- `refs/input-parsing.md` — Parsing rules per input type; the six parsed_brief fields
+- `refs/stitch-tools.md` — Stitch MCP tool names, params, model selection, variant fidelity defaults
 - `refs/prompt-guide.md` — Prompt synthesis rules, sanitization checklist, UI-intent checklist, before/after examples
 - `refs/stitch-api.md` — Stitch MCP API external documentation and schema reference
