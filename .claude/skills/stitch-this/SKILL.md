@@ -49,7 +49,7 @@ Parse all selected inputs per `refs/input-parsing.md`. Produce `parsed_brief` (s
 ### **Step 3 — Resolve refs** *(model: claude-sonnet-4-6)*
 Extract keywords from `parsed_brief.feature_name`, `screen_context`, and `components`. Run:
 ```
-bash scripts/resolve-refs.sh <keywords>
+bash ~/.claude/skills/stitch-this/scripts/resolve-refs.sh <keywords>
 ```
 Outputs `pandora_refs` and `benchmarking_refs`. Read matched images and analyse per `refs/ref-resolution.md` to produce `pandora_context` and `benchmarking_context`. Emit: `References loaded: <paths or "none">`.
 - If `parsed_brief` is missing both `feature_name` and `screen_context` → exit: *"I can't read this input — please name the screen you want."*
@@ -67,7 +67,7 @@ Show `optimised_prompt` in a code block. Ask: Approve / Edit / Abort.
   - If not, ask via `AskUserQuestion`: "Where should I save this?" — Current folder (`<CWD>`) / Desktop (`~/Desktop`) / Custom path. On Custom: ask user to type the path.
   - Then run:
     ```
-    bash scripts/save-stitch.sh new "$save_dir" "$optimised_prompt" \
+    bash ~/.claude/skills/stitch-this/scripts/save-stitch.sh new "$save_dir" "$optimised_prompt" \
       "<pandora_refs csv>" "<benchmarking_refs csv>" "<extra_refs csv>"
     ```
     Capture the `STITCH_DIR=<path>` line from script output and store as `stitch_dir` for this session.
@@ -98,7 +98,7 @@ Parse all selected inputs per `refs/input-parsing.md`. Classify each image or fi
 - Anything else (user-supplied file or image) → route to `extra_refs`
 Merge parsed inputs into `parsed_brief`, overriding conflicting fields. Re-run Step 4 to produce `refinement_prompt`. Then run:
 ```
-bash scripts/save-stitch.sh refine "$stitch_dir" "$refinement_prompt" \
+bash ~/.claude/skills/stitch-this/scripts/save-stitch.sh refine "$stitch_dir" "$refinement_prompt" \
   "<pandora_refs csv>" "<benchmarking_refs csv>" "<extra_refs csv>"
 ```
 Emit script output. Then run Step 6 → Step 7 with the selected screen as `selectedScreenIds`.

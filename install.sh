@@ -11,7 +11,6 @@ BRANCH="main"
 SKILL_NAME="stitch-this"
 
 SKILL_DEST="${HOME}/.claude/skills/${SKILL_NAME}"
-SCRIPTS_DEST="${HOME}/.claude/scripts"
 
 TMP_DIR="$(mktemp -d)"
 cleanup() { rm -rf "$TMP_DIR"; }
@@ -22,15 +21,13 @@ echo "Installing ${SKILL_NAME}..."
 curl -fsSL "https://github.com/${REPO}/archive/refs/heads/${BRANCH}.tar.gz" \
   | tar -xz -C "$TMP_DIR" --strip-components=1
 
-mkdir -p "$SKILL_DEST" "$SCRIPTS_DEST"
+mkdir -p "$SKILL_DEST"
 
 cp -r "${TMP_DIR}/.claude/skills/${SKILL_NAME}/." "$SKILL_DEST/"
-cp "${TMP_DIR}/.claude/scripts/"*.sh "$SCRIPTS_DEST/"
-chmod +x "$SCRIPTS_DEST/"*.sh
+chmod +x "$SKILL_DEST/scripts/"*.sh
 
 echo ""
 echo "Installed:"
 echo "  Skill   → ${SKILL_DEST}"
-echo "  Scripts → ${SCRIPTS_DEST}"
 echo ""
 echo "Restart Claude Code, then run: /stitch-this"
