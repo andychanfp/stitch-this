@@ -23,17 +23,6 @@ required-tools:
 - `/stitch-this` with no input → asks what you'd like to do (merged gate)
 - `/stitch-this build a food ordering screen` → captures input, proceeds directly to parse
 - Natural-language: "generate a Stitch screen", "create Stitch variations", "build a screen in Stitch"
-- Context: a `.md` or `.json` file is attached alongside design intent
-
-## Inputs
-
-| Name | Format | Source |
-|------|--------|--------|
-| inline description | single-line text | user message at invocation |
-| design brief | `.md` file | attached or referenced file |
-| design spec | `.json` file | attached or referenced file |
-| intent selection | user choice at opening gate | "new screen" / "variations" / "I have a file" |
-| figma reference | `figma.com` URL | user message at invocation |
 
 ## Outputs
 
@@ -43,40 +32,19 @@ required-tools:
 | screen variations | Stitch MCP response | inline in conversation |
 | screen links | URL or resource path per screen | inline in conversation |
 
-## Required tools
-
-This skill calls the following tools. Each must be available at runtime.
-
-| Tool | Used in | Purpose |
-|------|---------|---------|
-| `AskUserQuestion` | Steps 1, 2, 7, 10 | Gate (when no inline input), input gate, approval gate, and follow-up gate |
-| `Bash` | Step 3 | Discover glossary.json files under refs/ |
-| `Read` | Steps 2, 3 | Load `.md` / `.json` files and glossary + image files |
-| `Write` | Step 7 | Create `prompt.md` with raw input and optimised prompt inside `stitch-[n]/` |
-| `mcp__plugin_figma_figma__get_design_context` | Step 2 | Fetch structured design context from a Figma URL |
-| `mcp__stitch__list_projects` | Step 8 | Pick a project when none provided |
-| `mcp__stitch__get_project` | Step 8 | Resolve project context |
-| `mcp__stitch__list_screens` | Step 8 | Look up `selectedScreenIds` for variants |
-| `mcp__stitch__get_screen` | Step 9 | Fetch screen details and link after generation |
-| `mcp__stitch__generate_screen_from_text` | Step 8 | Create a new screen from the optimised prompt |
-| `mcp__stitch__generate_variants` | Step 8 | Generate variations of an existing screen |
-
 ## Progress emission
 
-Emit `Step X/10 — <message>` only for steps marked **emit**. Steps marked **silent** run without any user-facing output.
+Emit `Step X/10 — <message>` at steps 1, 2, 3, 7, 8, 9, 10. All other steps are silent.
 
-| Step | Emit? | Message |
-|------|-------|---------|
-| 1 | emit | figuring out what you'd like to do... |
-| 2 | emit | gathering your inputs... |
-| 3 | emit | finding visual references... |
-| 4 | silent | — |
-| 5 | silent | — |
-| 6 | silent | — |
-| 7 | emit | ready for your review... |
-| 8 | emit | generating your screens... |
-| 9 | emit | here are your variations... |
-| 10 | emit | what would you like to do next? |
+| Step | Message |
+|------|---------|
+| 1 | figuring out what you'd like to do... |
+| 2 | gathering your inputs... |
+| 3 | finding visual references... |
+| 7 | ready for your review... |
+| 8 | generating your screens... |
+| 9 | here are your variations... |
+| 10 | what would you like to do next? |
 
 ## Step-by-step protocol
 
@@ -94,21 +62,13 @@ Ask the user via `AskUserQuestion`: "What would you like to do?" with options:
 Store: option 1 → `mode = generate`, `intent = new`; option 2 → `mode = generate`, `intent = variations`; option 3 → `mode = prompt`. Wait for the answer before continuing.
 
 **Step 2 — Parse inputs**
-If `inline_input` is present, treat it as the text description — skip the `AskUserQuestion` prompt and go directly to parsing it as `text`.
-
-Otherwise, ask the user via `AskUserQuestion` (multiSelect): "What is your idea?" with options:
+Ask the user via `AskUserQuestion` (multiSelect): "What is your idea?" with options:
 1. Text description — a free-form one-liner or paragraph
 2. `.md` brief — attach or reference a Markdown file
 3. Figma URL — paste a `figma.com` design link
 4. Image — attach a screenshot or mockup
 
-Wait for the answer, then parse each selected input type. Before parsing, store the verbatim user input as `raw_input`:
-- `text`: `raw_input` = the user's typed text. Extract the six fields directly from the message.
-- `md`: `raw_input` = the file path + raw file content. Read the file with `Read`, then extract the six fields.
-- `figma_url`: `raw_input` = the Figma URL. Extract `fileKey` and `nodeId` from the URL (convert `-` to `:` in nodeId), call `mcp__plugin_figma_figma__get_design_context`, then extract the six fields from the response. Treat the design as a reference — extract intent, do not copy layout verbatim.
-- `image`: `raw_input` = the image file path. Read it with `Read`. Visually analyze to infer the six fields. Treat as reference — extract intent, tone, and component patterns without copying layouts verbatim.
-
-Merge across all selected inputs without duplication. Produce `parsed_brief`: a structured record with these six fields: feature name, screen context, components, user actions, tone, device target.
+Parse each selected input type per `refs/input-parsing.md`. Produce `parsed_brief` with the six fields defined there.
 
 **Step 3 — Resolve refs**
 Silently discover and load reference images that match the parsed brief.
@@ -177,8 +137,6 @@ Pass `deviceType` if inferable from `optimised_prompt` (mobile/desktop/tablet). 
 
 **Variant fidelity defaults:** Default `creativeRange` to `REFINE` and `aspects` to `["COLOR_SCHEME", "TEXT_CONTENT", "IMAGES"]`. Never include `LAYOUT` in aspects by default — this preserves the base screen's structure. Only add `LAYOUT` to aspects if the user explicitly asks for layout changes (e.g. "try a different layout", "restructure the screen"). Only use `creativeRange: "EXPLORE"` or `"REIMAGINE"` when the user explicitly requests it.
 
-**Model selection:** default `modelId` to `GEMINI_3_FLASH` on every Stitch call. Upgrade to `GEMINI_3_1_PRO` only if: (a) the user explicitly requested Pro or high fidelity, or (b) the prompt has 3+ interdependent components or requires pixel-level precision. When upgrading, state the reason before calling. Never use `GEMINI_3_PRO` (deprecated).
-
 **Step 9 — Present variations** *(mode = generate only)*
 Show every generated screen variation inline. Include each variation's screen ID and a one-line description. Show all variations — do not summarise.
 
@@ -192,6 +150,7 @@ Ask the user via `AskUserQuestion`: "What would you like to do next?" with optio
 
 ## References
 
-- `refs/stitch-tools.md` — Stitch MCP tool names, params, and tool-selection rules
+- `refs/input-parsing.md` — How to parse each input type and extract the six parsed_brief fields
+- `refs/stitch-tools.md` — Stitch MCP tool names, params, model selection rules, and tool-selection rules
 - `refs/prompt-guide.md` — Prompt synthesis rules, sanitization checklist, UI-intent checklist, before/after examples
 - `refs/stitch-api.md` — Stitch MCP API external documentation and schema reference
