@@ -1,0 +1,69 @@
+{
+  "refs": [
+    {
+      "tags": ["enrolment", "enrollment", "ELP", "promo", "free trial", "limited time", "14 days", "CTA", "monthly perks", "surprise perks"],
+      "path": "refs/pandora/subscriptions/enrolment/ELP-promo.png",
+      "description": "Enrolment landing page (ELP) with a free-trial promotional hero — 'Try 14 days free, then S$2.00/mo.' CTA. Shows monthly perks list (Indrive rides, restaurant discounts, free delivery) and surprise perks teaser. Use as the reference for any ELP variant that leads with a free-trial offer."
+    },
+    {
+      "tags": ["enrolment", "enrollment", "ELP", "segmented pricing", "select plan", "sticky footer", "price point", "monthly perks"],
+      "path": "refs/pandora/subscriptions/enrolment/ELP-segmented-pricing.png",
+      "description": "Enrolment landing page (ELP) with segmented pricing — shows the promotional price (S$2.00/mo.) in a sticky bottom bar alongside a 'Select plan' button. Perks list is identical to the promo ELP. Use when the ELP must surface a specific price tier without a free-trial CTA."
+    },
+    {
+      "tags": ["enrolment", "enrollment", "partnership", "DBS", "DBS Yuu", "partner exclusive", "landing page", "bank partner"],
+      "path": "refs/pandora/subscriptions/enrolment/partnership-landing-page.png",
+      "description": "Partnership enrolment landing page for DBS Yuu — headline 'Get pandapro at only S$1.99/mo. with DBS Yuu'. Lists partner-exclusive benefits (restaurant discounts, platform fee waiver, exclusive vouchers) and payment instructions requiring DBS Yuu card. Use as the reference for any bank/partner co-branded enrolment screen."
+    },
+    {
+      "tags": ["payment", "checkout", "free trial", "renewal plan", "plan selector", "billing", "confirm"],
+      "path": "refs/pandora/subscriptions/payment/payment-free-trial.png",
+      "description": "Payment checkout screen for a free-trial plan — shows the trial timeline (today → day 11 reminder → day 15 renewal), a renewal plan selector (1-month / 6-month / 12-month with savings badges), saved payment method, consent checkboxes, and a 'Confirm and start free trial' CTA with the total showing 'Free for 14 days'. Use as the reference for any free-trial payment confirmation flow."
+    },
+    {
+      "tags": ["payment", "checkout", "paid plan", "subscribe", "review plan", "plan selector", "billing"],
+      "path": "refs/pandora/subscriptions/payment/payment-paid-plan.png",
+      "description": "Payment checkout screen for a paid (non-trial) plan — shows a promotional banner, plan selector (1-month / 6-month / 12-month), saved payment method, consent checkboxes, and a 'Subscribe at S$2.00/mo.' CTA. Use as the reference for direct-paid subscription confirmation without a free trial."
+    },
+    {
+      "tags": ["RDP", "restaurant detail page", "sticky banner", "upsell", "in-session", "save with PRO", "cart"],
+      "path": "refs/pandora/subscriptions/rdp/rdp-1click-stickybanner.png",
+      "description": "Restaurant detail page (RDP) with a sticky bottom upsell banner — 'Save with PRO! Get it at S$2.00/mo. for 6 months' displayed above the cart bar. Use as the reference for the in-session subscription upsell sticky banner placement on the RDP."
+    },
+    {
+      "tags": ["RDP", "restaurant detail page", "1-click", "one-click", "interstitial", "upsell", "panda pro", "free trial", "Mastercard", "payment method"],
+      "path": "refs/pandora/subscriptions/rdp/rdp-1click.png",
+      "description": "RDP 1-click subscription interstitial — full-screen purple overlay surfaced mid-checkout, headline 'Save S$8.00 more now', shows 14-day free trial terms, perk icons, pre-filled payment method, and dual CTAs ('Try 14 days free' / 'Continue without pandapro'). Use as the reference for the 1-click upsell interstitial on the RDP."
+    },
+    {
+      "tags": ["RDP", "restaurant detail page", "1-click", "one-click", "success", "confirmation", "savings", "proceed to cart"],
+      "path": "refs/pandora/subscriptions/rdp/rdp-1click-success.png",
+      "description": "RDP 1-click subscription success state — overlay shows 'Nice! You're saving S$8.00 more with PRO' with the pandapro card illustration and a reminder about the free-trial end email. Single CTA 'Proceed to cart'. Use as the reference for the post-enrolment success state within the RDP 1-click flow."
+    },
+    {
+      "tags": ["unsubscription", "cancellation", "realised savings", "keep my plan", "retention", "savings summary"],
+      "path": "refs/pandora/subscriptions/unsubscription/unsub-realised-savings.png",
+      "description": "Unsubscription retention screen showing realised savings — headline 'You've saved S$26.50 since you've been pro!' with an itemised breakdown (restaurant orders, delivery discounts) and dual CTAs: 'Keep my plan' (primary) and 'Proceed with unsubscribing' (secondary). Use as the reference for the savings-summary retention step in the cancellation flow."
+    },
+    {
+      "tags": ["unsubscription", "cancellation", "resub offer", "50% off", "retention", "one-time offer", "winback"],
+      "path": "refs/pandora/subscriptions/unsubscription/unsub-resub-offer.png",
+      "description": "Unsubscription retention screen with a 50%-off resubscription offer — one-time offer badge, 'Stay on the pro lane for 50% off', shows discounted price and urgency copy ('Claim your offer in 24 hours'). Use as the reference for a price-discount retention offer during cancellation."
+    },
+    {
+      "tags": ["unsubscription", "cancellation", "segmented cancel", "S$2.00/mo", "renew", "retention", "one-time offer"],
+      "path": "refs/pandora/subscriptions/unsubscription/unsub-segmented-cancel.png",
+      "description": "Unsubscription retention screen with a segmented renewal offer — 'Don't miss out on renewing at S$2.00/mo. for the next 3 months', shows the discounted vs. standard price and a 75% renewal discount callout. Use as the reference for a segment-specific price retention screen in the cancellation flow."
+    },
+    {
+      "tags": ["unsubscription", "cancellation", "time left", "days remaining", "retention", "cancel deadline"],
+      "path": "refs/pandora/subscriptions/unsubscription/unsub-time-left.png",
+      "description": "Unsubscription retention screen highlighting remaining subscription time — 'You still have 12 days left', prompts user to place 2 more pro orders before cancelling and shows the cancel deadline date. Use as the reference for the time-remaining retention nudge step in the cancellation flow."
+    },
+    {
+      "tags": ["unsubscription", "cancellation", "survey", "exit survey", "churn reason", "tell us why", "feedback"],
+      "path": "refs/pandora/subscriptions/unsubscription/unusb-survey.png",
+      "description": "Unsubscription exit survey — 'Tell us why you're leaving' with a checklist of churn reasons (didn't save enough, minimum order too high, offers not attractive, limited restaurants, prefers other platforms, lifestyle changed, others) and a Skip option. Use as the reference for the cancellation reason survey screen."
+    }
+  ]
+}

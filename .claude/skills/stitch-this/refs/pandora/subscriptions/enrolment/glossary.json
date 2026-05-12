@@ -1,9 +1,0 @@
-{
-  "refs": [
-    {
-      "tags": ["subscription", "enrolment", "enrollment", "pro", "onboarding", "sign up", "join", "dashboard", "home"],
-      "path": "refs/pandora/subscriptions/enrolment/enrolment-home.png",
-      "description": "Pandora subscription enrolment home — authoritative layout and visual standard for all subscription enrolment screens"
-    }
-  ]
-}
