@@ -25,7 +25,7 @@ required-tools:
 
 ## Protocol
 
-### **Step 1 - Capture intent** *(model: Haiku)*
+### **Step 1 — Capture intent**
 Emit `Step 1/10 - checking objective...`
 
 Ask user via `AskUserQuestion`: "What would you like to generate?" with options:
@@ -33,112 +33,64 @@ Ask user via `AskUserQuestion`: "What would you like to generate?" with options:
 2. A new screen in Stitch — I'll build actual screens in Stitch from your brief, which you can later find on the Stitch web app → `mode = generate`, `intent = variations`
 3. Variations of existing screen(s) in Stitch — I'll generate variants of a screen you already have, which you can later find on the Stitch web app → `mode = generate`, `intent = new`
 
-### **Step 2 - Capture input type** *(skip if `inline_input` is present)* *(model: Sonnet)*
+### **Step 2 — Capture input type** 
 Emit `Step 2/10 - checking for input...`
+If inline input is present, ask via `AskUserQuestion` (multiSelect): "Got your idea ([idea]). Want to add anything to reinforce it?"
 
-Ask user via `AskUserQuestion` (multiSelect): "What would you to generate from?" 
-1. Text description - single-line input
+Otherwise ask: "What are you working from?"
+
+Present these options:
+1. Add more details - single-line input
 2. A .md file - from a directory or raw .md file
 3. Image references - from a directory or a single image file
 
-Parse selected input type(s) per `refs/input-guide.md`. Generate `parsed_brief` with the six fields defined there. `
+Parse all selected inputs per `refs/input-parsing.md`. Produce `parsed_brief` (six fields). Store original text as `raw_input`.
 
-### **Step 3 - Capture additional input** *(model: Sonnet)*
-Emit `Step 3/10 - checking if you have any other references...`
+### **Step 3 — Resolve refs** *(model: claude-sonnet-4-6)*
+Extract keywords from `parsed_brief.feature_name`, `screen_context`, and `components`. Run:
+```
+bash scripts/resolve-refs.sh <keywords>
+```
+Outputs `pandora_refs` and `benchmarking_refs`. Read matched images and analyse per `refs/ref-resolution.md` to produce `pandora_context` and `benchmarking_context`. Emit: `References loaded: <paths or "none">`.
+- If `parsed_brief` is missing both `feature_name` and `screen_context` → exit: *"I can't read this input — please name the screen you want."*
+- If brief fails UI-intent checklist (`refs/prompt-guide.md`, requires ≥3/5 yes) → exit: *"This describes [thing], not a UI screen — please provide a screen description."*
 
-Ask user via `AskUserQuestion` (multiSelect): "You have entered an idea. Do you want to add more details?" 
-1. Revise my initial input
-2. Add a .md file
-3. Add image references
+### **Step 4 - Optimise prompt**  *(silent, model: claude-sonnet-4-6)*
+Build `optimised_prompt` from `parsed_brief` per `refs/prompt-guide.md`. Encodes `pandora_context` as a `Style:` clause if present.
 
-Parse selected input type(s) per `refs/input-guide.md`. Generate `parsed_brief` with the six fields defined there. `
+### **Step 5 — Approval needed**
+Show `optimised_prompt` in a code block. Ask: Approve / Edit / Abort.
+- Edit → accept revision, re-run Step 4 sanitization, return here.
+- Abort → exit.
+- Approve, user chose option 3 → resolve save location:
+  - Check if `stitches/` exists in CWD. If yes, use CWD as `save_dir` and skip the prompt.
+  - If not, ask via `AskUserQuestion`: "Where should I save this?" — Current folder (`<CWD>`) / Desktop (`~/Desktop`) / Custom path. On Custom: ask user to type the path.
+  - Then run:
+    ```
+    bash scripts/save-stitch.sh "$save_dir" "$optimised_prompt"       "<pandora_refs csv>" "<benchmarking_refs csv>"
+    ```
+  - Emit script output, then:
+    > Copy the prompt above into [Google Stitch studio](https://stitch.withgoogle.com). Upload the files in `pandora/` and `benchmarking/` manually as references in Stitch.
+- Approve, user chose option 1 or 2 → continue to Step 6.
 
-### **Step 4 - Search, extract, resolve refs** *(model: Sonnet)*
-Emit `Step 4/10 - checking memory for references`
+### **Step 6 — Call Stitch MCP**
+Follow `refs/stitch-tools.md` for tool selection, param shapes, model selection, and variant defaults.
+- User chose option 1 → `mcp__stitch__generate_screen_from_text`, then `mcp__stitch__generate_variants`
+- User chose option 2 → `mcp__stitch__generate_variants` with `selectedScreenIds`
 
-Silently discover and load reference images that match the parsed brief.
+### **Step 7 — Present variations**
+Call `mcp__stitch__get_screen` for each result using `projects/{projectId}/screens/{screenId}`. Emit each variation with its ID, a URL or resource path. Proceed to step 8.
+ 
+### **Step 8 — Follow-up**
+Ask: "What's next?"
+1. Generate new screen → Step 1, clean state
+2. Deep dive → ask which screen (by ID or title), then run Step 6 as if user chose option 2 with that screen
+3. End session → terminate here
 
-1. Run via Bash: `find .claude/skills/stitch-this/refs -name "glossary.json"` to locate all glossary files under `refs/benchmarking/` and `refs/pandora/`.
-2. Read each glossary.json with `Read`. Each file has this shape:
-   ```json
-   { "refs": [{ "tags": ["..."], "path": "refs/...", "description": "..." }] }
-   ```
-3. Score every entry: count how many tags match any keyword in `parsed_brief.feature_name`, `screen_context`, or `components` (case-insensitive substring). Keep entries with score ≥ 1.
-4. Partition matched entries by source folder:
-   - `pandora_refs` — paths under `refs/pandora/` — the **authoritative visual standard**
-   - `benchmarking_refs` — paths under `refs/benchmarking/` — competitive context
-5. Emit a one-line summary of matched references before loading images. Format: `References loaded: <list of matched file paths, comma-separated>, or "none" if no matches.` Example: `References loaded: refs/pandora/subscriptions/enrolment/enrolment-home.png, refs/benchmarking/grab/enrolment-home.png`
-6. Read all matched image files with `Read`. Visually analyze them:
-   - From `pandora_refs`: extract precise layout structure, component placement, color usage, typography hierarchy, spacing rhythm, and any interaction patterns. Store this as `pandora_context`. The generated screen MUST reproduce this visual standard at ~99% fidelity — treat it as a pixel-level design spec, not inspiration.
-   - From `benchmarking_refs`: extract ideas, patterns, or differentiators that complement or contrast with the pandora reference. Store as `benchmarking_context`.
-7. If no pandora match is found, proceed without `pandora_context` — do not block.
-
-### **Step 5 — Optimise prompt** *(silent)*
-Emit `Step 5/10 - optimising your prompt`
-
-Follow `refs/prompt-guide.md`. Build the prompt from `parsed_brief` using the canonical Stitch structure: `[screen name] for [context]. Shows [components]. Tone: [tone]. Device: [device].`
-
-If `pandora_context` exists, extend the prompt with a `Style:` clause that describes the visual standard extracted from pandora in precise UI terms — layout structure, key component placement, color tone, spacing rhythm. This clause forces Stitch to reproduce the pandora visual language, not invent its own. Example: `Style: single-column card layout, hero banner at top with gradient overlay, CTA pinned to bottom, muted purple palette.`
-
-Strip non-UI content, vague qualifiers, and backend logic per the sanitization checklist. Produce `optimised_prompt`.
-
-### **Step 6 — Validate UI intent** *(silent)*
-Emit `Step 6/10 - grading the optimised prompt`
-Apply the UI-intent checklist in `refs/prompt-guide.md` to `optimised_prompt`. Pass requires ≥3 yes answers. If the prompt fails, refuse with: "This input describes [observed thing], not a UI screen — please provide a screen description." Exit.
-
-### **Step 7 — Approval gate**
-Emit `Step 7/10 - prompt needs approval`
-
-Show `optimised_prompt` to the user in a copyable code block. Ask via `AskUserQuestion`: (1) Approve, (2) Edit prompt, (3) Abort. 
-- On Edit: accept the user's revision, re-run Step 5 sanitization on it, return to this gate. 
-- On Abort: exit. 
-- On Approve: continue.
-- **If mode = prompt:** Run the artifact-saving protocol below, then display the exit message and stop.
-- **If mode = generate:** Continue to Step 8.
-
-**Artifact-saving protocol** *(mode = prompt only, runs after user approval)*
-
-1. **Ensure `stitches/` exists:** Run via Bash: `[ -d stitches ] || mkdir stitches`. Silent.
-2. **Determine next index:** Run via Bash: `ls -d stitches/stitch-*/ 2>/dev/null | wc -l | tr -d ' '`. The next `n` is that count + 1. Store as `stitch_n`.
-3. **Create directory structure:** Run via Bash: `mkdir -p stitches/stitch-${stitch_n}/benchmarking stitches/stitch-${stitch_n}/pandora`. Silent.
-4. **Write `prompt.md`:** Use `Write` to create `stitches/stitch-${stitch_n}/prompt.md` with this exact structure:
-   ```
-   ## Raw Input
-
-   <raw_input verbatim>
-
-   ## Optimised Prompt
-
-   <optimised_prompt verbatim>
-   ```
-5. **Copy refs:** For each path in `pandora_refs`, run via Bash: `cp "<path>" "stitches/stitch-${stitch_n}/pandora/"`. For each path in `benchmarking_refs`, run via Bash: `cp "<path>" "stitches/stitch-${stitch_n}/benchmarking/"`. If either list is empty, skip silently — do not create empty dirs or error.
-6. **Emit:** `Saved to stitches/stitch-${stitch_n}/` followed by a tree summary listing all files written (prompt.md, and any copied refs by folder).
-
-Then display this exit message:
-> Great! Copy and paste the prompt above to [Google Stitch studio](https://stitch.withgoogle.com). Your refs have been saved to `stitches/stitch-${stitch_n}/` — upload the files in `pandora/` and `benchmarking/` manually as references in Stitch.
-
-**Step 8 — Call Stitch MCP** *(mode = generate only)*
-Emit `Step 8/10 - calling Stitch MCP...`
-Follow `refs/stitch-tools.md` for tool selection, param shapes, and model selection rules. Branch on `intent`:
-- `intent = new` → call `mcp__stitch__generate_screen_from_text`, then `mcp__stitch__generate_variants` on the resulting screen
-- `intent = variations` → call `mcp__stitch__generate_variants` directly with `variantOptions`
-
-Pass `deviceType` if inferable from `optimised_prompt` (mobile/desktop/tablet). Default `variantCount` to 3.
-
-**Variant fidelity defaults:** Default `creativeRange` to `REFINE` and `aspects` to `["COLOR_SCHEME", "TEXT_CONTENT", "IMAGES"]`. Never include `LAYOUT` in aspects by default — this preserves the base screen's structure. Only add `LAYOUT` to aspects if the user explicitly asks for layout changes (e.g. "try a different layout", "restructure the screen"). Only use `creativeRange: "EXPLORE"` or `"REIMAGINE"` when the user explicitly requests it.
-
-### **Step 9 — Present variations** *(mode = generate only)*
-Emit `Step 9/10 - variations generated!`
-Show every generated screen variation inline. Include each variation's screen ID and a one-line description. Show all variations — do not summarise.
-
-For each screen, call `mcp__stitch__get_screen` using the full resource name (`projects/{projectId}/screens/{screenId}`). From the response, emit a link: if the response includes a URL, render it as a markdown link. If not, show the resource path (`projects/{projectId}/screens/{screenId}`) so the user can locate the screen in their Stitch project.
-
-### **Step 10 — Follow-up gate**
-Emit `Step 10/10 - session complete`
-Ask the user via `AskUserQuestion`: "What would you like to do next?" with options:
-1. Regenerate — go back to Step 1 with a clean slate
-2. Deep dive into one screen *(mode = generate only)* — ask which screen (by ID or title from Step 9), then jump directly to Step 8 with `intent = variations` and that screen as `selectedScreenIds`; skip Steps 1–7
-3. End session — exit
+### **Step 9 — Refine** *(deep dive only)*
+Ask via `AskUserQuestion` (multiSelect): "How would you like to refine this screen?" — Text direction / Image reference / `.md` file. 
+ 
+Parse all selected inputs per `refs/input-parsing.md`. Merge into `parsed_brief`, overriding any conflicting fields with the new input. Then run Step 4 → Step 5 → Step 6 → Step 7 with the selected screen as `selectedScreenIds`.
 
 ## References
 

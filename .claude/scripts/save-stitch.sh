@@ -1,66 +1,86 @@
 #!/usr/bin/env bash
-# save-stitch.sh — save a completed stitch artifact to stitches/stitch-<n>/
-# Usage: ./scripts/save-stitch.sh "<raw_input>" "<optimised_prompt>" \
-#          "<pandora_ref1>,<pandora_ref2>" "<benchmarking_ref1>,<benchmarking_ref2>"
-# Output: "Saved to stitches/stitch-<n>/" + tree summary
+# save-stitch.sh — save a completed stitch artifact
+# Usage: ./scripts/save-stitch.sh \
+#          "<save_dir>"              \  # resolved by caller (CWD, desktop, or custom)
+#          "<optimised_prompt>"      \
+#          "<pandora_refs_csv>"      \  # comma-separated paths, or empty
+#          "<benchmarking_refs_csv>"
+#
+# Writes:
+#   <save_dir>/stitches/stitch-<n>/
+#     prompt.md
+#     DESIGN.md
+#     pandora/         (only if refs present)
+#     benchmarking/    (only if refs present)
+#
+# Outputs: path to created stitch-<n>/ + tree summary
 
 set -euo pipefail
 
-RAW_INPUT="${1:-}"
-OPTIMISED_PROMPT="${2:-}"
-PANDORA_REFS="${3:-}"       # comma-separated paths, or empty
-BENCHMARKING_REFS="${4:-}"  # comma-separated paths, or empty
+SKILL_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+DESIGN_SRC="${SKILL_DIR}/refs/DESIGN.md"
 
-if [[ -z "$RAW_INPUT" || -z "$OPTIMISED_PROMPT" ]]; then
-  echo "Error: raw_input and optimised_prompt are required." >&2
+SAVE_DIR="${1:-}"
+OPTIMISED_PROMPT="${2:-}"
+PANDORA_REFS="${3:-}"
+BENCHMARKING_REFS="${4:-}"
+
+# ── Validate ─────────────────────────────────────────────────────────────────
+if [[ -z "$SAVE_DIR" || -z "$OPTIMISED_PROMPT" ]]; then
+  echo "Error: save_dir and optimised_prompt are required." >&2
   exit 1
 fi
 
-# Ensure stitches/ exists
-mkdir -p stitches
+if [[ ! -f "$DESIGN_SRC" ]]; then
+  echo "Error: DESIGN.md not found at ${DESIGN_SRC}" >&2
+  exit 1
+fi
 
-# Next index
-n=$(ls -d stitches/stitch-*/ 2>/dev/null | wc -l | tr -d ' ')
+# ── Ensure stitches/ exists ───────────────────────────────────────────────────
+STITCHES_DIR="${SAVE_DIR}/stitches"
+mkdir -p "$STITCHES_DIR"
+
+# ── Next stitch-[n] index ─────────────────────────────────────────────────────
+n=$(ls -d "${STITCHES_DIR}/stitch-"*/ 2>/dev/null | wc -l | tr -d ' ')
 n=$((n + 1))
-DIR="stitches/stitch-${n}"
+STITCH_DIR="${STITCHES_DIR}/stitch-${n}"
+mkdir -p "$STITCH_DIR"
 
-# Create base dir (subdirs created on demand below)
-mkdir -p "$DIR"
+# ── Write prompt.md ───────────────────────────────────────────────────────────
+printf '%s\n' "$OPTIMISED_PROMPT" > "${STITCH_DIR}/prompt.md"
 
-# Write prompt.md
-cat > "$DIR/prompt.md" <<EOF
-## Raw Input
+# ── Copy DESIGN.md ────────────────────────────────────────────────────────────
+cp "$DESIGN_SRC" "${STITCH_DIR}/DESIGN.md"
 
-${RAW_INPUT}
-
-## Optimised Prompt
-
-${OPTIMISED_PROMPT}
-EOF
-
-# Copy pandora refs
+# ── Copy pandora refs ─────────────────────────────────────────────────────────
 if [[ -n "$PANDORA_REFS" ]]; then
-  mkdir -p "$DIR/pandora"
+  mkdir -p "${STITCH_DIR}/pandora"
   IFS=',' read -ra refs <<< "$PANDORA_REFS"
   for ref in "${refs[@]}"; do
-    [[ -f "$ref" ]] && cp "$ref" "$DIR/pandora/"
+    ref="$(echo "$ref" | xargs)"
+    [[ -f "$ref" ]] && cp "$ref" "${STITCH_DIR}/pandora/" || \
+      echo "Warning: pandora ref not found — ${ref}" >&2
   done
 fi
 
-# Copy benchmarking refs
+# ── Copy benchmarking refs ────────────────────────────────────────────────────
 if [[ -n "$BENCHMARKING_REFS" ]]; then
-  mkdir -p "$DIR/benchmarking"
+  mkdir -p "${STITCH_DIR}/benchmarking"
   IFS=',' read -ra refs <<< "$BENCHMARKING_REFS"
   for ref in "${refs[@]}"; do
-    [[ -f "$ref" ]] && cp "$ref" "$DIR/benchmarking/"
+    ref="$(echo "$ref" | xargs)"
+    [[ -f "$ref" ]] && cp "$ref" "${STITCH_DIR}/benchmarking/" || \
+      echo "Warning: benchmarking ref not found — ${ref}" >&2
   done
 fi
 
-# Emit save confirmation + tree
-echo "Saved to ${DIR}/"
-find "$DIR" | sed "s|${DIR}||" | sort | while read -r line; do
-  [[ -z "$line" ]] && continue
-  depth=$(echo "$line" | tr -cd '/' | wc -c)
+# ── Emit summary ──────────────────────────────────────────────────────────────
+echo "Saved to ${STITCH_DIR}/"
+echo ""
+find "$STITCH_DIR" | sort | while read -r line; do
+  rel="${line#$STITCH_DIR}"
+  [[ -z "$rel" ]] && continue
+  depth=$(echo "$rel" | tr -cd '/' | wc -c)
   indent=$(printf '%*s' $((depth * 2)) '')
   echo "${indent}${line##*/}"
 done
