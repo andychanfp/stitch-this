@@ -24,7 +24,7 @@ curl -fsSL "https://github.com/${REPO}/archive/refs/heads/${BRANCH}.tar.gz" \
 mkdir -p "$SKILL_DEST"
 
 cp -r "${TMP_DIR}/.claude/skills/${SKILL_NAME}/." "$SKILL_DEST/"
-chmod +x "$SKILL_DEST/scripts/"*.sh
+find "$SKILL_DEST/scripts" -name "*.sh" -exec chmod +x {} \;
 
 echo ""
 echo "Installed:"
