@@ -1,43 +1,249 @@
 ---
 version: alpha
-name: "Bento Mobile"
-description: "Foodpanda Bento design system — Mobile scope (iOS). Sources: 📱 [Bento] Mobile · 🎨 [Bento] Brand Themes · 👑 [Bento] Pro Themes · [Core library] Tokens"
+name: Bento
+description: "TBD"
 
 colors:
-  primary: "Primary/color.primary.main"
-  secondary: "Secondary/color.secondary.main"
-  neutral: "Neutral/color.neutral50"
-  surface: "Background/color.background.default"
-  background: "Background/color.background.light"
-  error: "Error/color.error.main"
-  onPrimary: "Neutral/white"
-  onSurface: "Neutral/color.neutral100"
-  pro: "Pro/pro-primary"
+  brand:
+    brand-dark: #c21760
+    brand-highlight: #ffdddd
+    brand-primary: #ff2b85
+    brand-secondary: #6b7680
+    gradient-dark: #ffdddd
+    gradient-light: #ffffff
+  interaction:
+    interaction-background-hover: #ffebeb
+    interaction-focus: #ff2b85
+    interaction-focus-reversed: #ffebeb
+    interaction-primary: #e21b70
+    interaction-primary-feedback: #ffebeb
+    interaction-primary-hover: #c21760
+    interaction-reversed-white-opacity15:
+    interaction-reversed-white-opacity30:
+    interaction-reversed-white-opacity50:
+    interaction-secondary: #2e3138
+    interaction-secondary-border: #d3d5d7
+    interaction-secondary-feedback: #ffffff
+    interaction-secondary-highlight: #ffffff
+    interaction-secondary-hover: #090c0f
+    interaction-secondary-inactive: 
+    interaction-secondary-selected: #2e3138
+    interaction-tertiary: #f77c99
+    on-interaction-primary: #ffffff
+    on-interaction-primary-hover: #ffffff
+    on-interaction-secondary: #2e3138
+    on-interaction-secondary-hover: #090c0f
+  neutral:
+    neutral-border: #2e3138
+    neutral-divider: #e8e9ea
+    neutral-inactive: #b7babc
+    neutral-primary: #2e3138
+    neutral-secondary: #6b7175
+    neutral-surface: #f7f8f8
+    transparent: #ffffff
+    white: #ffffff00
+  system:
+    error: #bb2800
+    error-highlight: #ffe3db
+    information: #25537c
+    information-highlight: #dfedf7
+    success: #3c8264
+    success-gradient-bottom: #f0f5f300
+    success-gradient-top: #f0f5f3
+    success-highlight: #cbe7db
+    warning: #fcc54c  
+    warning-highlight: #feefcd
+  joker:
+    genericBG: #ffdddd
+    mainText: #c21760
+    timerBG: #c21760
+    exp2GenericBG: #ffebeb
+  rating:
+    popular-icon: #090c0f
+    ratings-rating: #ffb413
+    ratings-rating-background: #ffc4cc
+    ratings-rating-feedback-active: #e21b70
+    ratings-rating-feedback-background: #ffebeb
+    ratings-rating-outline: #e03000
+  deal:
+    deal-banner-text: #c21760
+    deal-highlight-lvl1: #ffebeb
+    deal-highlight-lvl2: #ffdddd
+    deal-primary: #c21760
+    deal-secondary: #f77c99
+    deal-tertiary: #ffc4cc
+    deal-text-on-white: #e21b70
+    price-emphasis: #090c0f
+  tag:
+    popular-highlight: #ffedc6
+    popular-tag-icon: #090c0f
+    popular-tag-text: #090c0f
+    rating-light-tag-icon: #ffffff
+    rating-light-tag-text: #ffffff
+    tag-deal-background: #e21b70
+    tag-deal-text: #ffffff
+    tag-dietary-kids: #c21760  
+    tag-dietary-kids-background: #ffebeb
+    tag-dietary-spicy: #bb2800
+    tag-dietary-spicy-background: #fdefeb
+    tag-dietary-vegan: #357258
+    tag-dietary-vegan-background: #f0f5f3
+    tag-dietary-vegetarian: #357258
+    tag-dietary-vegetarian-background: #f0f5f3
+    tag-primary-background: #e21b70
+    tag-primary-text: #ffffff
+    tag-secondary-background: #ffdddd
+    tag-secondary-text: #c21760
+    tag-sponsored-background: 
+    tag-success-text: #ffffff
+  overlay:
+    dark-4: #090c0f0a
+    dark-64: #090c0fa3
+    dark-80: #090c0fd6
+    light-56: #ffffff8f
+    light-80: #ffffffcc
+  layout:
+    alt-screen-surface: #ffffff
+    surface-gradient-bottom: #ffebeb
+    surface-gradient-top: #ffebebff
+  item-modifier:
+    item-modifier-required-background: #ffebeb
+    item-modifier-required-hover: #ffdddd
+    item-modifier-required-popular: #ffc4cc
+  pro:
+    on-pro-higlight: #452c63
+    pro-deal-highlight-1: #fcf3fe
+    pro-deal-highlight-2: #efddf5
+    pro-deal-highlight-3: #c69adf
+    pro-deal-highlight-4: #5c1d94
+    pro-gradient-end: #5c1d94
+    pro-gradient-start: #6e3dab
+    pro-primary: #452c63
 
 typography:
-  displayFont:
-    style: "Mobile/title/display"
-  headingFont:
-    style: "Mobile/title/large"
-  bodyFont:
-    style: "Mobile/body/base"
-    fontSize: "typography/body/base/font-size"
-    weight: "typography/body/base/weight"
-  captionFont:
-    style: "Mobile/body/xsmall"
-
-spacing:
-  scale: "Spacing/spacing00 → Spacing/spacing12"
+  title-display: 
+    fontFamily: "'PP Agrandir', 'Bricolage Grotesque', 'Chivo', 'Work Sans', 'Basic Sans', 'Segoe UI', -apple-system, system-ui, sans-serif"
+    fontSize: 24px
+    fontWeight: 800
+    lineHeight: 28px
+    letterSpacing: 0px
+  title-large: 
+    fontFamily: "'PP Agrandir', 'Bricolage Grotesque', 'Chivo', 'Work Sans', 'Basic Sans', 'Segoe UI', -apple-system, system-ui, sans-serif"
+    fontSize: 18px
+    fontWeight: 600
+    lineHeight: 21px
+    letterSpacing: 0px
+  title-medium-strong: 
+    fontFamily: "'PP Agrandir', 'Bricolage Grotesque', 'Chivo', 'Work Sans', 'Basic Sans', 'Segoe UI', -apple-system, system-ui, sans-serif"
+    fontSize: 18px
+    fontWeight: 800
+    lineHeight: 21px
+    letterSpacing: 0px
+  title-small: 
+    fontFamily: "'PP Agrandir', 'Bricolage Grotesque', 'Chivo', 'Work Sans', 'Basic Sans', 'Segoe UI', -apple-system, system-ui, sans-serif"
+    fontSize: 16px
+    fontWeight: 700
+    lineHeight: 19px
+    letterSpacing: 0px
+  highlight-base: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 14px
+    fontWeight: 700
+    lineHeight: 16px
+    letterSpacing: 0px
+  highlight-base-underlined: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 14px
+    fontWeight: 700
+    lineHeight: 16px
+    letterSpacing: 0px
+    decoration: underline
+  highlight-small: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 12px
+    fontWeight: 700
+    lineHeight: 14px
+    letterSpacing: 0px
+  highlight-small-underlined: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 12px
+    fontWeight: 700
+    lineHeight: 14px
+    letterSpacing: 0px
+    decoration: underline
+  highlight-xsmall: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 10px
+    fontWeight: 700
+    lineHeight: 11px
+    letterSpacing: 0px
+  highlight-xsmall-underlined: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 10px
+    fontWeight: 700
+    lineHeight: 11px
+    letterSpacing: 0px
+    decoration: underline
+  body-base: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 16px
+    letterSpacing: 0px
+  body-small: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 12px
+    fontWeight: 400
+    lineHeight: 14px
+    letterSpacing: 0px
+  body-small-underlined: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 12px
+    fontWeight: 400
+    lineHeight: 14px
+    letterSpacing: 0px
+    decoration: underline
+  body-xsmall: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 10px
+    fontWeight: 400
+    lineHeight: 11px
+    letterSpacing: 0px
+  body-xsmall-underlined: 
+    fontFamily: "'SF Pro', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, system-ui, sans-serif"
+    fontSize: 10px
+    fontWeight: 400
+    lineHeight: 11px
+    letterSpacing: 0px
+    decoration: underline
 
 rounded:
-  button: "CornerRadius/button"
-  field: "CornerRadius/field"
-  container: "CornerRadius/container"
-  overlay: "CornerRadius/overlay"
-  pill: "CornerRadius/pill"
-  circle: "CornerRadius/circle"
-  mini: "CornerRadius/mini"
-  base: "CornerRadius/base"
+  base: 8px
+  base-pressed: 8px
+  mini: 4px
+  overlay: 16px
+  media: 8px
+  container: 12px
+  container-pressed: 16px
+  container-edge: 8px
+  pill: 9999px
+  circle: 9999px
+  button: 8px
+  button-pressed: 12px
+  field: 8px
+  switch: 8px
+
+spacing:
+  xxxs: 2px
+  xxs: 4px
+  xs: 8px
+  st: 12px
+  sm: 16px
+  md: 24px
+  lg: 32px
+  xl: 48px
+  xxl: 64px
+  xxxl: 80px
 
 components:
   button:
@@ -47,6 +253,77 @@ components:
     backgroundColor: "{colors.surface}"
     elevation: "low"
 ---
+
+## Overview
+
+**Key Characteristics:**
+
+## Colors
+
+### Brand & Accent
+
+### Surface
+
+### Text
+
+### Semantic
+
+### Pro Subscription
+
+## Typography
+
+### Font Family
+
+### Hierarchy
+
+### Principles
+
+### Note on Font Substitutes
+
+## Layout
+
+### Spacing System
+
+### Grid & Container
+
+### Whitespace Philosophy
+
+## Elevation
+
+### Decorative Depth
+
+## Shapes
+
+### Border Radius Scale
+
+### Photography & illustration Geometry
+
+## Components
+
+## Do's and Dont's
+
+### Do
+
+### Don't
+
+## Responsive Behaviour
+
+### Breakpoints
+
+### Touch Targets
+
+### Collapsing Strategy
+
+### Image Behaviour
+
+## Iteration Guide
+
+## Known Gaps
+
+
+
+
+
 
 ## Overview
 
