@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Bento
-description: "TBD"
+description: A direct conversion of Bento’s foodpanda design language — a compact marketplace UI system built on white and soft-grey product surfaces, dense commerce components, and signature foodpanda magenta for primary CTAs, deal emphasis, selected states, and high-attention interactions. The system reads as energetic but functional like rounded cards and tiles, compact PP Agrandir and SF Pro typography, controlled 8px-based spacing, and semantic palettes for deals, Pro subscriptions, ratings, dietary tags, and system feedback.
 
 colors:
   brand:
@@ -986,6 +986,14 @@ components:
 ---
 
 ## Overview
+
+Bento is foodpanda’s compact marketplace design system, built around dense commerce patterns such as vendor tiles, product lists, cards, tags, banners, carousels, and action controls.
+
+The visual foundation is clean and functional: white and soft-grey surfaces, neutral text hierarchy, controlled strokes, and an 8px-based spacing rhythm.
+
+Foodpanda magenta acts as the main chromatic signal for primary CTAs, deal emphasis, selected states, and high-attention interactions.
+
+The system uses compact PP Agrandir and SF Pro typography, rounded but disciplined shapes, and semantic palettes for deals, Pro subscriptions, ratings, dietary tags, and system feedback.
 
 **Key Characteristics:**
 - Foodpanda magenta is the main chromatic signal: `{colors.interaction.primary}` `#e21b70` drives primary CTAs, deal tags, selected commercial emphasis, and high-attention interactive states.
