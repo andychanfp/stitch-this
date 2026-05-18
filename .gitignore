@@ -5,3 +5,4 @@ plan
 .DS_Store
 */stitches
 /stitches/*
+.prompt.md

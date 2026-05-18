@@ -503,7 +503,7 @@ components:
 **`accordion`** — Expandable content container. Used to progressively disclose supporting information while keeping the page compact. Available in default, pro primary, pro subtle, and subtle variants. Collapsed state shows the label and downward chevron; expanded state reveals the content slot and switches the chevron upward.
 - Default: background `{colors.neutral.white}`, label `{colors.neutral.primary}`, icon `{colors.neutral.primary}`, body text `{colors.neutral.primary}`
 - Pro primary: background `{colors.pro.pro-deal-highlight-4}`, label `{colors.neutral.white}`, icon `{colors.neutral.white}`, body text `{colors.neutral.white}`
-- Pro subtle: background `{colors.pro.pro-deal-highlight-1}`, label `{colors.neutral.primary}`, icon `{colors.neutral.primary}`, body text `{colors.neutral.primary}`
+- Pro subtle: background `{colors.pro.pro-deal-highlight-1}`, label `{colors.neutral.`primary}`, icon `{colors.neutral.primary}`, body text `{colors.neutral.primary}`
 - Subtle: background `{colors.neutral.surface}`, label `{colors.neutral.primary}`, icon `{colors.neutral.primary}`, body text `{colors.neutral.primary}`
 - Shape `{rounded.container}`, label type `{typography.title-small}`, body type `{typography.body-base}`
 
@@ -519,13 +519,13 @@ components:
 
 **`button-primary`** — Primary interaction CTA. The default high-emphasis button for the main action in a flow. Use for primary CTAs such as “Continue”, “Confirm”, “Subscribe”, “Place order”, and other main progression actions.
 - Background `{colors.interaction.primary}`, text `{colors.neutral.white}`, type `{typography.highlight-base}`
-- 
+
 **`button-primary-reversed`** — Reversed primary interaction CTA. Used when the primary action needs to sit on a coloured, image-based, or high-emphasis surface while staying visually prominent.
 - Background `{colors.neutral.white}`, text `{colors.interaction.primary}`, border `{colors.interaction.secondary-border}`, type `{typography.highlight-base}`
 
 **`button-secondary`** — Secondary interaction CTA. Used for lower-emphasis actions that still need button affordance, such as “Cancel”, “Save”, “Edit”, or alternative actions beside a primary CTA.
 - Background `{colors.neutral.white}`, text `{colors.interaction.on-interaction-secondary}`, border `{colors.interaction.secondary}`, type `{typography.highlight-base}`
-- 
+
 **`button-secondary-reversed`** — Reversed secondary interaction CTA. Used for secondary actions on light, branded, image-based, or high-contrast surfaces where the reversed treatment needs stronger visual contrast.
 - Background `{colors.interaction.secondary-hover}`, text `{colors.neutral.white}`, border `{colors.neutral.white}`, type `{typography.highlight-base}`
 
@@ -541,7 +541,22 @@ components:
 
 ### Bottom Navigation
 
+**`bottom-navigation`** — Persistent bottom navigation for switching between primary app destinations. Supports 3, 4, or 5 tabs, with optional home indication. Each tab contains an icon and label, distributed evenly across the navigation bar.
+- Container background `{colors.neutral.white}`, top divider `{colors.neutral.divider}`, divider stroke `{strokes.stroke-divider}`
+- Icon `{colors.neutral.secondary}`, icon stroke `{strokes.stroke-icon}`, label `{colors.neutral.secondary}`, label type `{typography.highlight-small}`
+- Selected indicator `{colors.neutral.primary}`, indicator shape `{rounded.pill}`
+- Layout: tab items distributed evenly, icon-to-label gap `{spacing.xxs}`, vertical padding `{spacing.xs}`, horizontal padding `{spacing.sm}`
+- Home indication: optional bottom indicator using `{colors.neutral.primary}`, shape `{rounded.pill}`, with bottom safe-area spacing using `{spacing.xs}`
+
 ### Bottom Sheets
+**`bottom-sheet`** — Modal surface anchored to the bottom of the screen. Used for focused actions, contextual decisions, or supporting flows without leaving the current screen. Supports default and reversed/pro surfaces, with a draggable handle, custom content slot, divider, and sticky footer action.
+- Default surface: background `{colors.neutral.white}`, handle `{colors.neutral.divider}`, top shape `{rounded.overlay}`
+- Reversed/pro surface: background gradient `{colors.pro.pro-gradient-start}` to `{colors.pro.pro-gradient-end}`, handle `{colors.neutral.white}`, divider `{colors.interaction.reversed-white-opacity30}`
+- Divider `{colors.neutral.divider}`, divider stroke `{strokes.stroke-divider}`
+- Footer action uses button tokens: primary action background `{colors.interaction.primary}`, text `{colors.neutral.white}`, type `{typography.highlight-base}`, rounded `{rounded.button}`
+- Reversed footer action uses background `{colors.neutral.white}`, text `{colors.interaction.primary}`, border `{colors.interaction.secondary-border}`, type `{typography.highlight-base}`, rounded `{rounded.button}`
+- Layout: horizontal padding `{spacing.sm}`, vertical section padding `{spacing.sm}`, handle-to-content spacing `{spacing.xs}`, content-to-footer spacing `{spacing.sm}`
+- Content slot accepts a custom component; slot content should inherit its own colour, typography, spacing, and shape tokens.
 
 ### Banners
 
@@ -559,9 +574,33 @@ components:
 
 ### Dividers
 
+**`divider`** — Visual separator used to divide content, group related sections, or create structure between adjacent UI elements. Supports thin, dashed, and thick styles in horizontal or vertical orientation, with default and reversed colour treatments compressed into the same component.
+- Line colour `{colors.neutral.divider}` on light surfaces or `{colors.interaction.reversed-white-opacity30}` on dark surfaces; thin stroke `{strokes.stroke-static}`, dashed stroke `{strokes.stroke-divider}`, thick stroke `{strokes.stroke-navigation}`
+- Orientation: horizontal for separating stacked content, vertical for separating side-by-side content.
+- Layout: spacing before and after dividers should follow the surrounding component rhythm using `{spacing.xs}`, `{spacing.st}`, or `{spacing.sm}` depending on density.
+
 ### Headers
 
+**`header`** — Screen-level container that anchors navigation, page context, and optional supporting modules at the top of a screen. Houses the `navigation-bar` component and can include search, tabs, filter pills, progress stepper, banners, or a custom content slot.
+- Default header: background `{colors.neutral.white}`, title `{colors.neutral.primary}`, subtitle `{colors.neutral.secondary}`, icons `{colors.neutral.primary}`, icon stroke `{strokes.stroke-icon}`
+- Reversed/primary header: background `{colors.interaction.primary}`, title `{colors.neutral.white}`, subtitle `{colors.neutral.white}`, icons `{colors.neutral.white}`, icon stroke `{strokes.stroke-icon}`
+- Navigation bar: inherits `navigation-bar` structure; supports leading menu, title/subtitle, link action, and trailing icon actions.
+- Search module: field background `{colors.neutral.surface}`, input text `{colors.neutral.primary}`, placeholder `{colors.neutral.secondary}`, search/filter icons `{colors.neutral.secondary}`, shape `{rounded.pill}`, type `{typography.body-small}`
+- Tab module: selected text `{colors.neutral.primary}` or `{colors.neutral.white}` on reversed headers, active text `{colors.neutral.secondary}` or `{colors.neutral.white}`, indicator uses matching foreground colour, stroke `{strokes.stroke-navigation}`, shape `{rounded.pill}`, type `{typography.highlight-base}`
+- Filter pill module: background `{colors.neutral.white}`, text `{colors.neutral.primary}`, border `{colors.interaction.secondary-border}`, icon `{colors.neutral.primary}`, shape `{rounded.pill}`, stroke `{strokes.stroke-interactive}`, type `{typography.highlight-small}`
+- Progress stepper module: active step background `{colors.neutral.primary}`, active text `{colors.neutral.white}`, inactive step background `{colors.neutral.divider}`, inactive text `{colors.neutral.secondary}`, shape `{rounded.circle}`, connector stroke `{strokes.stroke-divider}`, label type `{typography.highlight-xsmall}`
+- Banner/content module: background `{colors.system.information-highlight}`, text `{colors.neutral.primary}`, link `{typography.body-small-underlined}`, link text `{colors.neutral.primary}`
+- Custom slot: supports injected content below the navigation bar; slot content should inherit its own colour, typography, spacing, shape, and stroke tokens.
+- Layout: horizontal padding `{spacing.sm}`, vertical padding `{spacing.xs}`, navigation-to-module spacing `{spacing.xs}`, module item gap `{spacing.xs}`, compact internal gaps `{spacing.xxs}`; bottom divider uses `{colors.neutral.divider}` with `{strokes.stroke-divider}` when separating header from page content.
+
 ### Lists
+
+### Links
+
+**`link`** — Underlined text action used for inline navigation, secondary actions, or supporting actions where a full button surface is unnecessary. Available in default and reversed treatments for light or dark surfaces.
+- Default: text `{colors.interaction.on-interaction-secondary}`, type `{typography.highlight-base-underlined}`
+- Reversed: text `{colors.neutral.white}`, type `{typography.highlight-base-underlined}`
+- Small size uses type `{typography.highlight-small-underlined}` when the link appears in compact layouts or metadata-level actions.
 
 ### Loaders
 
@@ -570,6 +609,17 @@ components:
 ### Modals
 
 ### Navigation Bars
+
+**`navigation-bar`** — Header-level navigation bar used inside a `header` component to provide page context, navigation access, search entry, and trailing actions. Supports title/subtitle, title-only, branded title, search field, custom content slot, leading menu, link action, icon actions, and disabled action states.
+- Container background `{colors.neutral.white}`, bottom divider `{colors.neutral.divider}`, divider stroke `{strokes.stroke-divider}`
+- Leading icon uses `{colors.neutral.primary}` with stroke `{strokes.stroke-icon}`; supports menu or navigation affordance.
+- Title content: title text `{colors.neutral.primary}` with type `{typography.highlight-small}`; subtitle text `{colors.neutral.secondary}` with type `{typography.body-xsmall}`
+- Branded title/content uses `{colors.interaction.primary}` for brand-emphasis text or logo treatment, with supporting subtitle `{colors.neutral.secondary}`
+- Search variant: search field background `{colors.neutral.surface}`, input text `{colors.neutral.primary}`, placeholder `{colors.neutral.secondary}`, search/clear icons `{colors.neutral.secondary}`, shape `{rounded.pill}`, type `{typography.body-small}`
+- Custom slot variant: slot area may contain custom content; slot surface should use inherited component tokens, with focus/selection outline using `{colors.interaction.focus}` where applicable.
+- Trailing actions: link text `{colors.neutral.primary}` with type `{typography.highlight-small}`; icon actions use `{colors.neutral.primary}` with stroke `{strokes.stroke-icon}`
+- Disabled action state uses `{colors.neutral.inactive}` for link or icon colour.
+- Layout: horizontal padding `{spacing.sm}`, item gap `{spacing.xs}`, compact icon-to-text spacing `{spacing.xxs}`, vertical padding `{spacing.xs}`; trailing actions align to the right and may combine link plus one or more icon actions.
 
 ### Pills
 
@@ -598,6 +648,13 @@ components:
 ### Swipe Actions
 
 ### Tabs
+
+**`tab`** — Navigation control for switching between related content views. Supports text-only or icon-leading tabs, fixed or horizontally scrollable layouts, and default or reversed treatments for light and dark surfaces.
+- Default: selected text `{colors.neutral.primary}`, active text `{colors.neutral.secondary}`, indicator `{colors.neutral.primary}`, type `{typography.highlight-base}`
+- Reversed: selected text `{colors.neutral.white}`, active text `{colors.neutral.white}`, indicator `{colors.neutral.white}`, type `{typography.highlight-base}`
+- With icon: icon inherits selected or active text colour, icon stroke `{strokes.stroke-icon}`, icon-to-label gap `{spacing.xxs}`
+- Indicator uses stroke `{strokes.stroke-navigation}` and shape `{rounded.pill}`
+- Layout: tab items can be distributed evenly or horizontally scrollable; use horizontal padding `{spacing.sm}`, vertical padding `{spacing.xs}`, and label-to-indicator spacing `{spacing.xxs}`
 
 ### Tags
 
