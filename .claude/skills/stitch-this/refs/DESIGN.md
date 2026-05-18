@@ -259,11 +259,742 @@ strokes:
   stroke-navigation: 4
 
 components:
+  accordion:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    iconColor: "{colors.neutral.primary}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+    variants:
+      default:
+        backgroundColor: "{colors.neutral.white}"
+        textColor: "{colors.neutral.primary}"
+      pro-primary:
+        backgroundColor: "{colors.pro.pro-deal-highlight-4}"
+        textColor: "{colors.neutral.white}"
+      pro-subtle:
+        backgroundColor: "{colors.pro.pro-deal-highlight-1}"
+        textColor: "{colors.neutral.primary}"
+      subtle:
+        backgroundColor: "{colors.neutral.surface}"
+        textColor: "{colors.neutral.primary}"
+  button-primary:
+    backgroundColor: "{colors.interaction.primary}"
+    textColor: "{colors.neutral.white}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.button}"
+    padding: "{spacing.xs} {spacing.sm}"
+  button-primary-reversed:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.interaction.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.button}"
+    padding: "{spacing.xs} {spacing.sm}"
+  button-secondary:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.interaction.on-interaction-secondary}"
+    borderColor: "{colors.interaction.secondary}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.button}"
+    padding: "{spacing.xs} {spacing.sm}"
+  button-secondary-reversed:
+    backgroundColor: "{colors.interaction.secondary-hover}"
+    textColor: "{colors.neutral.white}"
+    borderColor: "{colors.neutral.white}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.button}"
+    padding: "{spacing.xs} {spacing.sm}"
+  button-text:
+    backgroundColor: "{colors.neutral.transparent}"
+    textColor: "{colors.interaction.on-interaction-secondary}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.button}"
+    padding: "0px"
+  button-circular:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    iconColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-icon}"
+    typography: "{typography.body-small}"
+    rounded: "{rounded.circle}"
+    padding: "{spacing.xs}"
+    variants:
+      no-container:
+        backgroundColor: "{colors.neutral.transparent}"
+        borderColor: "{colors.neutral.transparent}"
+      contained:
+        backgroundColor: "{colors.neutral.white}"
+        borderColor: "{colors.interaction.secondary-border}"
+      elevated:
+        elevation: "Low"
+  bottom-navigation:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.secondary}"
+    dividerColor: "{colors.neutral.divider}"
+    selectedColor: "{colors.neutral.primary}"
+    typography: "{typography.highlight-small}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xs} {spacing.sm}"
+  bottom-sheet:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    dividerColor: "{colors.neutral.divider}"
+    typography: "{typography.body-base}"
+    rounded: "{rounded.overlay}"
+    padding: "{spacing.sm}"
+    variants:
+      default:
+        backgroundColor: "{colors.neutral.white}"
+        handleColor: "{colors.neutral.divider}"
+      pro-reversed:
+        backgroundGradient: "{colors.pro.pro-gradient-start} -> {colors.pro.pro-gradient-end}"
+        textColor: "{colors.neutral.white}"
+        handleColor: "{colors.neutral.white}"
+        dividerColor: "{colors.interaction.reversed-white-opacity30}"
+  banner-information:
+    backgroundColor: "{colors.system.information-highlight}"
+    textColor: "{colors.neutral.primary}"
+    linkColor: "{colors.neutral.primary}"
+    typography: "{typography.body-small}"
+    linkTypography: "{typography.body-small-underlined}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.xs} {spacing.st}"
+  banner-deal:
+    backgroundColor: "{colors.deal.deal-highlight-lvl1}"
+    textColor: "{colors.neutral.primary}"
+    linkColor: "{colors.neutral.primary}"
+    accentColor: "{colors.deal.deal-banner-text}"
+    typography: "{typography.body-small}"
+    linkTypography: "{typography.body-small-underlined}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.xs} {spacing.st}"
+  card:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    dividerColor: "{colors.neutral.divider}"
+    stroke: "{strokes.stroke-interactive}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-small}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+  carousel:
+    backgroundColor: "{colors.neutral.transparent}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-small}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+    variants:
+      contained:
+        backgroundColor: "{colors.neutral.white}"
+      highlighted-header:
+        backgroundGradient: "{colors.layout.surface-gradient-top} -> {colors.layout.surface-gradient-bottom}"
+      media-header:
+        rounded: "{rounded.media}"
+  checkbox:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    selectedColor: "{colors.interaction.secondary-selected}"
+    checkmarkColor: "{colors.neutral.white}"
+    disabledColor: "{colors.neutral.inactive}"
+    stroke: "{strokes.stroke-input}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.mini}"
+    padding: "0px"
+  card-description:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-interactive}"
+    typography: "{typography.title-small}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+    variants:
+      default:
+        backgroundColor: "{colors.neutral.white}"
+        textColor: "{colors.neutral.primary}"
+      pro:
+        backgroundColor: "{colors.pro.pro-deal-highlight-4}"
+        textColor: "{colors.neutral.white}"
+  category-tile:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    borderColor: "{colors.neutral.border}"
+    selectedBorderColor: "{colors.neutral.border}"
+    stroke: "{strokes.stroke-interactive}"
+    typography: "{typography.highlight-small}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.xs}"
+    variants:
+      none:
+        backgroundColor: "{colors.neutral.transparent}"
+        borderColor: "{colors.neutral.transparent}"
+      subtle:
+        backgroundColor: "{colors.neutral.surface}"
+      contained:
+        backgroundColor: "{colors.neutral.white}"
+      deal:
+        backgroundColor: "{colors.interaction.primary-feedback}"
+        selectedBorderColor: "{colors.interaction.primary}"
+  choice-card:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-interactive}"
+    typography: "{typography.body-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.st}"
+    states:
+      active:
+        backgroundColor: "{colors.interaction.secondary-highlight}"
+        borderColor: "{colors.interaction.focus}"
+        stroke: "{strokes.stroke-interactive-focus}"
+      pressed:
+        backgroundColor: "{colors.interaction.secondary-feedback}"
+      disabled:
+        backgroundColor: "{colors.neutral.surface}"
+        borderColor: "{colors.neutral.surface}"
+  divider:
+    backgroundColor: "{colors.neutral.divider}"
+    reversedColor: "{colors.interaction.reversed-white-opacity30}"
+    stroke: "{strokes.stroke-divider}"
+    rounded: "{rounded.base}"
+    padding: "0px"
+    variants:
+      thin:
+        stroke: "{strokes.stroke-static}"
+      dashed:
+        stroke: "{strokes.stroke-divider}"
+      thick:
+        stroke: "{strokes.stroke-navigation}"
+  header:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.primary}"
+    dividerColor: "{colors.neutral.divider}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-small}"
+    rounded: "{rounded.base}"
+    padding: "{spacing.xs} {spacing.sm}"
+    variants:
+      default:
+        backgroundColor: "{colors.neutral.white}"
+        textColor: "{colors.neutral.primary}"
+      reversed-primary:
+        backgroundColor: "{colors.interaction.primary}"
+        textColor: "{colors.neutral.white}"
+        iconColor: "{colors.neutral.white}"
+  input-field:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    placeholderColor: "{colors.neutral.secondary}"
+    labelColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-input}"
+    typography: "{typography.body-base}"
+    labelTypography: "{typography.body-xsmall}"
+    helperTypography: "{typography.body-xsmall}"
+    rounded: "{rounded.field}"
+    padding: "{spacing.xs} {spacing.st}"
+    states:
+      disabled:
+        backgroundColor: "{colors.neutral.surface}"
+        textColor: "{colors.neutral.inactive}"
+        borderColor: "{colors.neutral.surface}"
+      error:
+        borderColor: "{colors.system.error}"
+        helperColor: "{colors.system.error}"
+        stroke: "{strokes.stroke-input-focus}"
+      success:
+        borderColor: "{colors.system.success}"
+        helperColor: "{colors.system.success}"
+        stroke: "{strokes.stroke-input-focus}"
+  link:
+    backgroundColor: "{colors.neutral.transparent}"
+    textColor: "{colors.interaction.on-interaction-secondary}"
+    typography: "{typography.highlight-base-underlined}"
+    rounded: "{rounded.base}"
+    padding: "0px"
+    variants:
+      reversed:
+        textColor: "{colors.neutral.white}"
+      small:
+        typography: "{typography.highlight-small-underlined}"
+  list:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.primary}"
+    iconColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-interactive}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+  message-information:
+    backgroundColor: "{colors.system.information-highlight}"
+    textColor: "{colors.neutral.primary}"
+    iconColor: "{colors.system.information}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+  message-warning:
+    backgroundColor: "{colors.system.warning-highlight}"
+    textColor: "{colors.neutral.primary}"
+    iconColor: "{colors.neutral.primary}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+  message-error:
+    backgroundColor: "{colors.system.error-highlight}"
+    textColor: "{colors.neutral.primary}"
+    iconColor: "{colors.system.error}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+  message-success:
+    backgroundColor: "{colors.system.success-highlight}"
+    textColor: "{colors.neutral.primary}"
+    iconColor: "{colors.system.success}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+  modal:
+    backgroundColor: "{colors.neutral.white}"
+    overlayColor: "{colors.overlay.dark-80}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.primary}"
+    typography: "{typography.title-display}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.overlay}"
+    padding: "{spacing.md}"
+    elevation: "High"
+  navigation-bar:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.primary}"
+    dividerColor: "{colors.neutral.divider}"
+    typography: "{typography.highlight-small}"
+    bodyTypography: "{typography.body-xsmall}"
+    rounded: "{rounded.base}"
+    padding: "{spacing.xs} {spacing.sm}"
+  pill-default:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    iconColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-interactive}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xs} {spacing.sm}"
+    states:
+      selected:
+        backgroundColor: "{colors.interaction.secondary-selected}"
+        textColor: "{colors.neutral.white}"
+      disabled:
+        backgroundColor: "{colors.neutral.inactive}"
+        textColor: "{colors.neutral.white}"
+  pill-small:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    iconColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-interactive}"
+    typography: "{typography.highlight-small}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xxs} {spacing.st}"
+  pill-row:
+    backgroundColor: "{colors.neutral.transparent}"
+    textColor: "{colors.neutral.primary}"
+    typography: "{typography.title-small}"
+    rounded: "{rounded.base}"
+    padding: "0px"
+    childComponent: "pill-default"
+    gap: "{spacing.xs}"
+  pill-icon:
+    backgroundColor: "{colors.neutral.white}"
+    iconColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-interactive}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xs}"
+    states:
+      selected:
+        backgroundColor: "{colors.interaction.secondary-selected}"
+        iconColor: "{colors.neutral.white}"
+      badge:
+        backgroundColor: "{colors.interaction.primary}"
+        textColor: "{colors.neutral.white}"
+        typography: "{typography.highlight-xsmall}"
+        rounded: "{rounded.circle}"
+  price:
+    backgroundColor: "{colors.neutral.transparent}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.base}"
+    padding: "0px"
+    variants:
+      emphasized:
+        textColor: "{colors.deal.price-emphasis}"
+        typography: "{typography.title-small}"
+      discounted:
+        textColor: "{colors.interaction.primary}"
+        typography: "{typography.title-small}"
+      pro:
+        textColor: "{colors.pro.pro-deal-highlight-4}"
+      delivery-fee:
+        textColor: "{colors.neutral.secondary}"
+        discountColor: "{colors.interaction.primary}"
+      unit-price:
+        typography: "{typography.highlight-small}"
+      sold-out:
+        badgeBackgroundColor: "{colors.system.information-highlight}"
+        badgeTextColor: "{colors.system.information}"
+        rounded: "{rounded.pill}"
+  product-tile:
+    backgroundColor: "{colors.neutral.transparent}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    mediaBackgroundColor: "{colors.neutral.surface}"
+    iconColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    typography: "{typography.highlight-base}"
+    bodyTypography: "{typography.body-small}"
+    rounded: "{rounded.media}"
+    padding: "0px"
+  product-list:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.primary}"
+    mediaBackgroundColor: "{colors.neutral.surface}"
+    iconColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    dividerColor: "{colors.neutral.divider}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+  progress-stepper:
+    backgroundColor: "{colors.neutral.transparent}"
+    textColor: "{colors.neutral.secondary}"
+    activeColor: "{colors.neutral.primary}"
+    activeTextColor: "{colors.neutral.white}"
+    trackColor: "{colors.neutral.divider}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-navigation}"
+    typography: "{typography.highlight-base}"
+    labelTypography: "{typography.title-small}"
+    rounded: "{rounded.circle}"
+    padding: "0px"
+  promo-banner:
+    backgroundColor: "{colors.brand.primary}"
+    textColor: "{colors.neutral.white}"
+    iconColor: "{colors.neutral.white}"
+    typography: "{typography.highlight-base}"
+    bodyTypography: "{typography.body-small}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+    variants:
+      subtle:
+        backgroundColor: "{colors.brand.highlight}"
+        textColor: "{colors.neutral.primary}"
+      deal:
+        backgroundColor: "{colors.deal.deal-highlight-lvl1}"
+        textColor: "{colors.deal.text-on-white}"
+      pro:
+        backgroundGradient: "{colors.pro.pro-gradient-start} -> {colors.pro.pro-gradient-end}"
+        textColor: "{colors.neutral.white}"
+  sleeve-banner:
+    backgroundColor: "{colors.interaction.secondary}"
+    textColor: "{colors.neutral.white}"
+    iconColor: "{colors.neutral.white}"
+    typography: "{typography.body-base}"
+    highlightTypography: "{typography.highlight-base}"
+    rounded: "{rounded.container-edge}"
+    padding: "{spacing.xs} {spacing.sm}"
+    variants:
+      default:
+        backgroundColor: "{colors.interaction.secondary}"
+        pressedBackgroundColor: "{colors.interaction.secondary-hover}"
+      pro-primary:
+        backgroundGradient: "{colors.pro.pro-gradient-start} -> {colors.pro.pro-gradient-end}"
+        textColor: "{colors.neutral.white}"
+      pro-subtle:
+        backgroundColor: "{colors.pro.pro-deal-highlight-1}"
+        pressedBackgroundColor: "{colors.pro.pro-deal-highlight-2}"
+        textColor: "{colors.pro.on-pro-highlight}"
+  quantity-stepper:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    iconColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-interactive}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xs}"
+    variants:
+      add-only:
+        rounded: "{rounded.circle}"
+      count-badge:
+        backgroundColor: "{colors.interaction.secondary-selected}"
+        textColor: "{colors.neutral.white}"
+        rounded: "{rounded.circle}"
+      split:
+        backgroundColor: "{colors.neutral.transparent}"
+  search-input:
+    backgroundColor: "{colors.neutral.surface}"
+    textColor: "{colors.neutral.primary}"
+    placeholderColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.secondary}"
+    focusColor: "{colors.interaction.focus}"
+    stroke: "{strokes.stroke-input-focus}"
+    typography: "{typography.body-base}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xs} {spacing.sm}"
+    variants:
+      reversed:
+        backgroundColor: "{colors.neutral.white}"
+  radio-button:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    selectedColor: "{colors.neutral.primary}"
+    selectedInnerColor: "{colors.neutral.white}"
+    disabledColor: "{colors.neutral.inactive}"
+    stroke: "{strokes.stroke-interactive}"
+    typography: "{typography.title-large}"
+    rounded: "{rounded.circle}"
+    padding: "0px"
+  switch-default:
+    backgroundColor: "{colors.neutral.surface}"
+    textColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.secondary}"
+    stroke: "{strokes.stroke-icon}"
+    typography: "{typography.body-base}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xs} {spacing.sm}"
+    states:
+      pressed:
+        backgroundColor: "{colors.neutral.divider}"
+  switch-stroked:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.secondary}"
+    borderColor: "{colors.interaction.secondary-border}"
+    stroke: "{strokes.stroke-input}"
+    typography: "{typography.body-base}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xs} {spacing.sm}"
+  switch-dynamic-label:
+    backgroundColor: "{colors.neutral.surface}"
+    textColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.secondary}"
+    stroke: "{strokes.stroke-icon}"
+    typography: "{typography.body-base}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xs} {spacing.sm}"
+    variants:
+      as-a-whole:
+        typography: "{typography.body-base}"
+      letter-by-letter:
+        typography: "{typography.body-base}"
+      empty:
+        textColor: "{colors.neutral.transparent}"
+  snackbar:
+    backgroundColor: "{colors.neutral.primary}"
+    textColor: "{colors.neutral.white}"
+    iconColor: "{colors.neutral.white}"
+    borderColor: "{colors.neutral.white}"
+    stroke: "{strokes.stroke-interactive}"
+    typography: "{typography.body-base}"
+    actionTypography: "{typography.highlight-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.st} {spacing.sm}"
+  tab:
+    backgroundColor: "{colors.neutral.transparent}"
+    textColor: "{colors.neutral.secondary}"
+    selectedTextColor: "{colors.neutral.primary}"
+    indicatorColor: "{colors.neutral.primary}"
+    iconColor: "{colors.neutral.secondary}"
+    stroke: "{strokes.stroke-navigation}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xs} {spacing.sm}"
+    variants:
+      reversed:
+        textColor: "{colors.neutral.white}"
+        selectedTextColor: "{colors.neutral.white}"
+        indicatorColor: "{colors.neutral.white}"
+  tag:
+    backgroundColor: "{colors.tag.tag-primary-background}"
+    textColor: "{colors.tag.tag-primary-text}"
+    iconColor: "{colors.tag.tag-primary-text}"
+    stroke: "{strokes.stroke-icon}"
+    typography: "{typography.highlight-xsmall}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xxs}"
+    variants:
+      primary:
+        backgroundColor: "{colors.tag.tag-primary-background}"
+        textColor: "{colors.tag.tag-primary-text}"
+      deal:
+        backgroundColor: "{colors.tag.tag-deal-background}"
+        textColor: "{colors.tag.tag-deal-text}"
+      secondary:
+        backgroundColor: "{colors.tag.tag-secondary-background}"
+        textColor: "{colors.tag.tag-secondary-text}"
+      popular:
+        backgroundColor: "{colors.tag.popular-highlight}"
+        textColor: "{colors.tag.popular-tag-text}"
+      inactive:
+        backgroundColor: "{colors.neutral.surface}"
+        textColor: "{colors.neutral.inactive}"
+      information:
+        backgroundColor: "{colors.system.information-highlight}"
+        textColor: "{colors.system.information}"
+      error:
+        backgroundColor: "{colors.system.error-highlight}"
+        textColor: "{colors.system.error}"
+      success:
+        backgroundColor: "{colors.system.success}"
+        textColor: "{colors.tag.tag-success-text}"
+      pro:
+        backgroundColor: "{colors.pro.pro-deal-highlight-4}"
+        textColor: "{colors.neutral.white}"
+      pro-light:
+        backgroundColor: "{colors.pro.pro-deal-highlight-1}"
+        textColor: "{colors.pro.on-pro-highlight}"
+  rating:
+    backgroundColor: "{colors.neutral.transparent}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.rating.ratings-rating}"
+    typography: "{typography.highlight-xsmall}"
+    bodyTypography: "{typography.body-xsmall}"
+    rounded: "{rounded.base}"
+    padding: "0px"
+  dietary-tag:
+    backgroundColor: "{colors.tag.tag-dietary-vegan-background}"
+    textColor: "{colors.tag.tag-dietary-vegan}"
+    iconColor: "{colors.tag.tag-dietary-vegan}"
+    stroke: "{strokes.stroke-icon}"
+    typography: "{typography.highlight-xsmall}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xxs}"
+    variants:
+      vegan:
+        backgroundColor: "{colors.tag.tag-dietary-vegan-background}"
+        textColor: "{colors.tag.tag-dietary-vegan}"
+      vegetarian:
+        backgroundColor: "{colors.tag.tag-dietary-vegetarian-background}"
+        textColor: "{colors.tag.tag-dietary-vegetarian}"
+      spicy:
+        backgroundColor: "{colors.tag.tag-dietary-spicy-background}"
+        textColor: "{colors.tag.tag-dietary-spicy}"
+      kids:
+        backgroundColor: "{colors.tag.tag-dietary-kids-background}"
+        textColor: "{colors.tag.tag-dietary-kids}"
+  brand-tag:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    borderColor: "{colors.neutral.divider}"
+    stroke: "{strokes.stroke-interactive-subtle}"
+    typography: "{typography.highlight-xsmall}"
+    rounded: "{rounded.pill}"
+    padding: "{spacing.xxs}"
+    states:
+      loading:
+        backgroundColor: "{colors.neutral.surface}"
+        skeletonColor: "{colors.neutral.inactive}"
+  transparent-tag:
+    backgroundColor: "{colors.neutral.transparent}"
+    textColor: "{colors.neutral.primary}"
+    iconColor: "{colors.neutral.primary}"
+    typography: "{typography.body-xsmall}"
+    rounded: "{rounded.base}"
+    padding: "0px"
+  tooltip:
+    backgroundColor: "{colors.system.information}"
+    textColor: "{colors.neutral.white}"
+    pointerColor: "{colors.system.information}"
+    typography: "{typography.highlight-base}"
+    rounded: "{rounded.overlay}"
+    padding: "{spacing.xs} {spacing.sm}"
+  vendor-list:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.primary}"
+    mediaRounded: "{rounded.media}"
+    logoBackgroundColor: "{colors.neutral.white}"
+    logoBorderColor: "{colors.neutral.divider}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+
+  vendor-tile:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.primary}"
+    mediaRounded: "{rounded.media}"
+    logoBackgroundColor: "{colors.neutral.white}"
+    logoBorderColor: "{colors.neutral.divider}"
+    ratingColor: "{colors.rating.ratings-rating}"
+    sponsoredBackgroundColor: "{colors.overlay.dark-64}"
+    sponsoredTextColor: "{colors.neutral.white}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.container}"
+    padding: "{spacing.sm}"
+    variants:
+      deal:
+        backgroundColor: "{colors.deal.deal-highlight-lvl2}"
+        textColor: "{colors.deal.text-on-white}"
+      pro-benefit:
+        backgroundColor: "{colors.pro.pro-deal-highlight-1}"
+        textColor: "{colors.pro.pro-primary}"
+  walkthrough:
+    backgroundColor: "{colors.neutral.white}"
+    textColor: "{colors.neutral.primary}"
+    secondaryTextColor: "{colors.neutral.secondary}"
+    iconColor: "{colors.neutral.primary}"
+    pointerColor: "{colors.neutral.white}"
+    typography: "{typography.title-small}"
+    bodyTypography: "{typography.body-base}"
+    rounded: "{rounded.overlay}"
+    padding: "{spacing.sm}"
+    elevation: "High"
 ---
 
 ## Overview
 
 **Key Characteristics:**
+- Foodpanda magenta is the main chromatic signal: `{colors.interaction.primary}` `#e21b70` drives primary CTAs, deal tags, selected commercial emphasis, and high-attention interactive states.
+- White and soft-grey product surfaces dominate the system: `{colors.neutral.white}` `#ffffff`, `{colors.neutral.surface}` `#f7f8f8`, `{colors.neutral.divider}` `#e8e9ea`, and `{colors.neutral.primary}` `#2e3138` create a dense marketplace UI foundation.
+- Typography is compact and product-oriented: expressive `PP Agrandir` titles sit above utilitarian `SF Pro` body/highlight text, with a tight scale from 24px down to 10px and zero letter-spacing throughout.
+- Hierarchy is carried mostly through weight, not size: body and highlight tokens often share the same size but shift from 400 to 700 weight for labels, metadata, prices, links, and interaction emphasis.
+- Components are built around reusable commerce patterns — cards, product tiles, product lists, vendor tiles, prices, tags, banners, carousels, and choice cards — rather than decorative brand pages or editorial layouts.
+- Shape language is rounded but controlled: buttons and media use 8px, containers use 12px, overlays use 16px, while pills, tags, search bars, circular buttons, and radio controls use `{rounded.pill}` / `{rounded.circle}` `9999px`.
+- The system separates semantic palettes by purpose: deal pinks, Pro purples, rating yellows, dietary greens, and system feedback colours are reserved for specific product meanings instead of being used as general decoration.
 
 ## Colors
 
@@ -560,17 +1291,97 @@ components:
 
 ### Banners
 
+**Global banner properties**
+- Shape `{rounded.container}`, text type `{typography.body-small}` or `{typography.body-base}`, link type `{typography.body-small-underlined}` or `{typography.highlight-small-underlined}`
+- Layout: content padding `{spacing.xs}` / `{spacing.st}`, horizontal content gap `{spacing.xs}`, text-to-link gap `{spacing.xxxs}` or `{spacing.xxs}`
+- Optional illustration slot: placed at the trailing edge; uses spacing `{spacing.xs}` from text content
+- Variants: supports full-width and non-full-width layouts, single-line and multi-line content, with or without link label, and with or without trailing illustration
+- Elevated variant: uses low elevation when the banner needs stronger separation from the surface
+- Non-elevated variant: no shadow; banner sits directly on the parent surface
+
+**`banner-information`** — Informational banner used to communicate neutral service updates, delivery notices, delays, or contextual guidance without implying an error or promotional state.
+- Background `{colors.system.information-highlight}`, text `{colors.neutral.primary}`, link `{colors.neutral.primary}`
+- Illustration/icon uses information or brand treatment where applicable; icon stroke `{strokes.stroke-icon}`
+- Elevated state: background `{colors.system.information-highlight}`, shadow low elevation
+- Full-width state: stretches to parent width while preserving internal padding `{spacing.xs}` / `{spacing.st}`
+
+**`banner-deal`** — Deal or promotional banner used to communicate offers, incidents with promotional tone, or attention-grabbing commercial messages.
+- Background `{colors.deal.deal-highlight-lvl1}` or `{colors.interaction.primary-feedback}`, text `{colors.neutral.primary}`, link `{colors.neutral.primary}`
+- Deal/brand accent uses `{colors.deal.deal-banner-text}` or `{colors.interaction.primary}` where emphasis is needed
+- Illustration/icon uses deal or brand accent treatment; icon stroke `{strokes.stroke-icon}`
+- Elevated state: background `{colors.deal.deal-highlight-lvl1}` or `{colors.interaction.primary-feedback}`, shadow low elevation
+- Full-width state: stretches to parent width while preserving internal padding `{spacing.xs}` / `{spacing.st}`
+
 ### Card
+
+**`card`** — Flexible container used to group related content, actions, media, and metadata into a single scannable unit. Supports header content, product/media rows, dividers, footer actions, promotional strips, and custom content slots.
+- Container background `{colors.neutral.white}`, border `{colors.interaction.secondary-border}`, stroke `{strokes.stroke-interactive}`, shape `{rounded.container}`
+- Header: title text `{colors.neutral.primary}` with type `{typography.title-small}`; subtitle/metadata text `{colors.neutral.secondary}` with type `{typography.body-small}`
+- Media: image or icon slots use shape `{rounded.media}`; media containers may use background `{colors.neutral.surface}` with border `{colors.interaction.secondary-border}`
+- Divider: colour `{colors.neutral.divider}`, stroke `{strokes.stroke-divider}`
+- Footer actions: primary action uses background `{colors.interaction.primary}`, text `{colors.neutral.white}`, type `{typography.highlight-base}`, rounded `{rounded.button}`; secondary action uses background `{colors.neutral.white}`, text `{colors.interaction.on-interaction-secondary}`, border `{colors.interaction.secondary}`, stroke `{strokes.stroke-interactive}`, rounded `{rounded.button}`
+- Promotional strip or deal footer uses background `{colors.interaction.primary-feedback}`, text `{colors.interaction.primary}`, icon `{colors.interaction.primary}`, type `{typography.highlight-small}`
+- Optional trailing actions use icon `{colors.neutral.primary}` with stroke `{strokes.stroke-icon}`
+- Layout: card padding `{spacing.sm}`, header-to-content spacing `{spacing.sm}`, media/item gap `{spacing.xs}`, section spacing `{spacing.sm}`, footer button gap `{spacing.xs}`
 
 ### Carousel
 
+**`carousel`** — Horizontally scrollable content group used to display related product tiles, recommendations, promotions, or curated collections. Supports simple header, highlighted header, media header, and contained card treatments.
+- Container: default uses background `{colors.neutral.transparent}`; contained variant uses background `{colors.neutral.white}`, shape `{rounded.container}`
+- Highlighted header: background gradient uses `{colors.layout.surface-gradient-top}` to `{colors.layout.surface-gradient-bottom}`, shape `{rounded.container}`
+- Media header: image/media area uses shape `{rounded.media}` or `{rounded.container}` when attached to a contained carousel
+- Header icon: background `{colors.neutral.surface}`, icon `{colors.neutral.white}`, shape `{rounded.mini}`
+- Header title: text `{colors.neutral.primary}`, type `{typography.title-small}`
+- Header subtitle: text `{colors.neutral.secondary}`, type `{typography.body-small}`
+- Navigation action: background `{colors.neutral.white}`, icon `{colors.neutral.primary}`, border `{colors.interaction.secondary-border}`, shape `{rounded.circle}`, stroke `{strokes.stroke-icon}`
+- Content: product items use `product-tile` as the nested item component
+- Layout: header padding `{spacing.sm}`, icon-to-text gap `{spacing.xs}`, title-to-subtitle gap `{spacing.xxxs}`, header-to-content gap `{spacing.xs}`, carousel item gap `{spacing.xs}`
+
 ### Checkboxes
+
+**`checkbox`** — Selection control used when users can choose one or more options from a set. Supports selected, unselected, disabled, and optional label variants.
+- Unselected: background `{colors.neutral.white}`, border `{colors.interaction.secondary-border}`, stroke `{strokes.stroke-input}`.
+- Selected: background `{colors.interaction.secondary-selected}`, checkmark `{colors.neutral.white}`.
+- Disabled unselected: background `{colors.neutral.white}`, border `{colors.neutral.inactive}`, stroke `{strokes.stroke-input}`.
+- Disabled selected: background `{colors.neutral.inactive}`, checkmark `{colors.neutral.white}`.
+- Label: text `{colors.neutral.primary}`, disabled label `{colors.neutral.inactive}`, type `{typography.highlight-base}`.
+- Shape: checkbox `{rounded.mini}`.
+- Layout: checkbox-to-label gap `{spacing.xs}`.
 
 ### Card Description
 
+**`card-description`** — Compact descriptive card used to communicate a benefit, feature, or promotional value proposition. Supports default and pro styles, optional media, multi-line title text, and a custom content slot.
+- Default: background `{colors.neutral.white}`, text `{colors.neutral.primary}`, border `{colors.interaction.secondary-border}`, stroke `{strokes.stroke-interactive}`, shape `{rounded.container}`
+- Pro: background `{colors.pro.pro-deal-highlight-4}`, text `{colors.neutral.white}`, shape `{rounded.container}`
+- Title uses `{typography.title-small}` and can wrap across multiple lines when content is not truncated.
+- Media slot sits above the title and inherits asset-specific styling.
+- Custom content slot can replace the title area; slot content should define its own colour, typography, spacing, shape, and stroke tokens.
+- Layout: internal padding `{spacing.sm}`, media-to-title gap `{spacing.xs}`, content slot spacing follows `{spacing.xs}` or `{spacing.sm}` depending on density.
+
 ### Category Tiles
 
+**`category-tile`** — Selectable category entry used to browse, filter, or navigate by product/category type. Supports vertical and horizontal layouts, none/subtle/contained surfaces, default/highlighted/deal treatments, selected and pressed states, and loading skeletons.
+- Global: label `{colors.neutral.primary}`, label type `{typography.highlight-xsmall}` or `{typography.highlight-small}`, icon/image container shape `{rounded.media}`, selected border stroke `{strokes.stroke-interactive}`, icon-to-label gap `{spacing.xxs}`
+- Layout: vertical stacks image above label; horizontal places image before label with gap `{spacing.xs}`; contained variants use internal padding `{spacing.xs}` or `{spacing.st}`
+- None: background `{colors.neutral.transparent}`, no container border, used when the tile should sit directly on the parent surface
+- Subtle: background `{colors.neutral.surface}`, shape `{rounded.container}`, used for lower-emphasis category entries with a visible but quiet surface
+- Contained: background `{colors.neutral.white}`, shape `{rounded.container}`, used when the category tile needs clearer card affordance
+- Default treatment: background `{colors.neutral.white}` or `{colors.neutral.surface}`, label `{colors.neutral.primary}`, selected border `{colors.neutral.border}`
+- Highlighted treatment: background `{colors.neutral.white}` or `{colors.neutral.surface}`, label `{colors.neutral.primary}`, selected border `{colors.neutral.border}`
+- Deal treatment: background `{colors.interaction.primary-feedback}`, label `{colors.neutral.primary}`, selected border `{colors.interaction.primary}`
+- Selected: applies border using `{strokes.stroke-interactive}`; default/highlighted selected border uses `{colors.neutral.border}`, deal selected border uses `{colors.interaction.primary}`
+- Pressed: uses pressed container shape `{rounded.container-pressed}` where the tile has a visible surface
+- Loading: skeleton surface `{colors.neutral.surface}`, skeleton marks `{colors.neutral.inactive}`, shape `{rounded.container}` or `{rounded.media}` depending on placeholder area
+
 ### Choice Card
+
+**`choice-card`** — Selectable container used to house a subcomponent or compact content block as a choice option. Use when users need to select one item from a set, such as delivery options, benefit options, modifiers, or compact preference choices.
+- Global: minimum size 32px × 32px, shape `{rounded.container}`, padding `{spacing.st}`, content spacing can be substituted with any spacing token or omitted when the child component defines its own layout
+- Inactive: background `{colors.neutral.white}`, border `{colors.interaction.secondary-border}`, border stroke `{strokes.stroke-interactive}`, no elevation
+- Active: background `{colors.interaction.secondary-highlight}`, border `{colors.interaction.focus}`, border stroke `{strokes.stroke-interactive-focus}`
+- Pressed: background `{colors.interaction.secondary-feedback}`, border `{colors.interaction.secondary-border}`, border stroke `{strokes.stroke-interactive}`
+- Disabled: background `{colors.neutral.surface}`, border none, no elevation
+- Content slot: inherits the child component’s icon, text, typography, and spacing tokens; the choice card only controls selectable surface, padding, shape, border, and state treatment
 
 ### Dividers
 
@@ -593,7 +1404,19 @@ components:
 - Custom slot: supports injected content below the navigation bar; slot content should inherit its own colour, typography, spacing, shape, and stroke tokens.
 - Layout: horizontal padding `{spacing.sm}`, vertical padding `{spacing.xs}`, navigation-to-module spacing `{spacing.xs}`, module item gap `{spacing.xs}`, compact internal gaps `{spacing.xxs}`; bottom divider uses `{colors.neutral.divider}` with `{strokes.stroke-divider}` when separating header from page content.
 
-### Lists
+### Input Fields
+
+**`input-field`** — Form field used to capture short text, values, or structured user input. Supports label, placeholder, filled value, helper text, leading icon, trailing icon, trailing link, disabled, error, and success states.
+- Global: background `{colors.neutral.white}`, shape `{rounded.field}`, border `{colors.interaction.secondary-border}`, border stroke `{strokes.stroke-input}`, input text `{colors.neutral.primary}`, placeholder `{colors.neutral.secondary}`, label `{colors.neutral.primary}`
+- Typography: label type `{typography.body-xsmall}`, input value type `{typography.body-base}`, helper/error/success message type `{typography.body-xsmall}`, trailing link type `{typography.highlight-xsmall-underlined}`
+- Layout: horizontal padding `{spacing.st}`, vertical padding `{spacing.xs}`, label-to-field gap `{spacing.xxxs}`, field-to-helper gap `{spacing.xxxs}`, icon-to-text gap `{spacing.xs}`
+- Leading icon: icon `{colors.interaction.primary}`, icon stroke `{strokes.stroke-icon}`, used when the field needs a contextual input cue
+- Trailing icon: icon `{colors.neutral.primary}`, icon stroke `{strokes.stroke-icon}`, used for field actions such as visibility toggle, clear, or contextual control
+- Trailing link: text `{colors.interaction.on-interaction-secondary}`, type `{typography.highlight-xsmall-underlined}`, used for compact inline actions inside the field
+- Filled: value text `{colors.neutral.primary}`, border `{colors.interaction.secondary-border}`
+- Disabled: background `{colors.neutral.surface}`, border `{colors.neutral.surface}`, label/input/icon `{colors.neutral.inactive}`
+- Error: border `{colors.system.error}`, border stroke `{strokes.stroke-input-focus}`, helper text `{colors.system.error}`, helper icon `{colors.system.error}`
+- Success: border `{colors.system.success}`, border stroke `{strokes.stroke-input-focus}`, helper text `{colors.system.success}`, helper icon `{colors.system.success}`
 
 ### Links
 
@@ -602,11 +1425,45 @@ components:
 - Reversed: text `{colors.neutral.white}`, type `{typography.highlight-base-underlined}`
 - Small size uses type `{typography.highlight-small-underlined}` when the link appears in compact layouts or metadata-level actions.
 
-### Loaders
+### List Item
+
+**`list`** — Tappable list item used to display a short title and supporting subtitle, usually leading to a detail view or next step. Supports optional leading icon, optional supporting info icon, trailing chevron, and outlined surface treatment.
+- Container: background `{colors.neutral.white}`, shape `{rounded.container}`.
+- Text: title `{colors.neutral.primary}` with `{typography.title-small}`, subtitle `{colors.neutral.primary}` with `{typography.body-base}`.
+- Icons: leading icon, supporting info icon, and trailing chevron use `{colors.neutral.primary}` with stroke `{strokes.stroke-icon}`.
+- Outlined variant: border `{colors.interaction.secondary-border}`, stroke `{strokes.stroke-interactive}`.
+- Layout: internal padding `{spacing.sm}`, leading icon-to-content gap `{spacing.sm}`, title-to-subtitle gap `{spacing.xxxs}`, content-to-supporting icon gap `{spacing.sm}`, trailing chevron aligned to the end with `{spacing.sm}` spacing.
 
 ### Messages
 
+**Global properties** — Shared structure for all message components. Used to keep feedback messages visually consistent across information, warning, error, and success types.
+- Container shape `{rounded.container}`, title `{typography.title-small}` or `{typography.highlight-base}`, body `{typography.body-base}` or `{typography.body-small}`.
+- Layout: internal padding `{spacing.sm}`, icon-to-content gap `{spacing.xs}`, title-to-body gap `{spacing.xxxs}`, stacked action top spacing `{spacing.xs}`, trailing action spacing `{spacing.sm}`.
+- Action button: background `{colors.neutral.transparent}`, text `{colors.interaction.on-interaction-secondary}`, border `{colors.interaction.secondary}`, stroke `{strokes.stroke-interactive}`, shape `{rounded.button}`, label `{typography.highlight-base}`.
+- Navigation variant: trailing chevron uses `{colors.neutral.primary}`, stroke `{strokes.stroke-icon}`.
+- Variants: supports stacked action, trailing action, and navigation treatment.
+
+**`message-information`** — Informational feedback message. Used for neutral guidance, status updates, availability notes, or contextual help that does not require urgent action.
+- Background `{colors.system.information-highlight}`, title `{colors.neutral.primary}`, body `{colors.neutral.primary}`, icon `{colors.system.information}`.
+
+**`message-warning`** — Warning feedback message. Used when the user should be aware of a possible consequence, risk, or irreversible change before continuing.
+- Background `{colors.system.warning-highlight}`, title `{colors.neutral.primary}`, body `{colors.neutral.primary}`, icon `{colors.neutral.primary}`.
+
+**`message-error`** — Error feedback message. Used when something failed, is blocked, or requires correction before the user can proceed.
+- Background `{colors.system.error-highlight}`, title `{colors.neutral.primary}`, body `{colors.neutral.primary}`, icon `{colors.system.error}`.
+
+**`message-success`** — Success feedback message. Used to confirm that an action was completed successfully or that a positive system state has been reached.
+- Background `{colors.system.success-highlight}`, title `{colors.neutral.primary}`, body `{colors.neutral.primary}`, icon `{colors.system.success}`.
+
 ### Modals
+
+**`modal`** — Centered overlay surface used for high-attention decisions, confirmations, or blocking flows. Supports title, subtitle/body content, optional close action, and one or two actions using primary and secondary buttons.
+- Overlay background `{colors.overlay.dark-80}`, modal surface `{colors.neutral.white}`, shape `{rounded.overlay}`, elevation `High`
+- Title text `{colors.neutral.primary}`, title type `{typography.title-display}`; subtitle/body text `{colors.neutral.secondary}`, subtitle/body type `{typography.body-base}`
+- Close action icon `{colors.neutral.primary}`, icon stroke `{strokes.stroke-icon}`
+- Primary action: background `{colors.interaction.primary}`, text `{colors.neutral.white}`, type `{typography.highlight-base}`, rounded `{rounded.button}`
+- Secondary action: background `{colors.neutral.white}`, text `{colors.interaction.on-interaction-secondary}`, border `{colors.interaction.secondary}`, stroke `{strokes.stroke-interactive}`, type `{typography.highlight-base}`, rounded `{rounded.button}`
+- Layout: modal padding `{spacing.md}`, content-to-action spacing `{spacing.md}`, title-to-subtitle spacing `{spacing.xxs}`, button stack or button row gap `{spacing.xs}`
 
 ### Navigation Bars
 
@@ -623,29 +1480,159 @@ components:
 
 ### Pills
 
+**Global properties** — Shared pill behaviour and styling across default, small, row, and icon pills. Used for compact filtering, selection, or categorisation controls.
+- Shape `{rounded.pill}`, border `{colors.interaction.secondary-border}`, stroke `{strokes.stroke-interactive}`.
+- Default state: background `{colors.neutral.white}`, text `{colors.neutral.primary}`, icon `{colors.neutral.primary}`.
+- Selected state: background `{colors.interaction.secondary-selected}`, text `{colors.neutral.white}`, icon `{colors.neutral.white}`.
+- Disabled state: background `{colors.neutral.inactive}`, text `{colors.neutral.white}`, icon `{colors.neutral.white}`.
+- Icon stroke `{strokes.stroke-icon}`.
+
+**`pill-default`** — Standard pill used for selectable labels, filters, or short categorical controls. Supports text-only, leading icon, trailing icon, and icon-position variants.
+- Text `{typography.highlight-base}`, horizontal padding `{spacing.sm}`, vertical padding `{spacing.xs}`, icon-to-text gap `{spacing.xs}`.
+
+**`pill-small`** — Compact pill used in tighter layouts where the default pill takes too much space. Supports the same text-only, leading icon, trailing icon, and icon-position variants as the default pill.
+- Text `{typography.highlight-small}`, horizontal padding `{spacing.st}`, vertical padding `{spacing.xxs}`, icon-to-text gap `{spacing.xxs}`.
+
+**`pill-row`** — Grouped pill layout used to present multiple related selectable options under a short section label.
+- Row title `{colors.neutral.primary}`, title type `{typography.title-small}`.
+- Pill items use `pill-default` styling, with item gap `{spacing.xs}` and row-to-row spacing `{spacing.md}`.
+
+**`pill-icon`** — Icon-only pill used for compact actions such as filtering or sorting. Supports selected, unselected, disabled, and badge variants.
+- Container background follows global pill states; icon uses `{colors.neutral.primary}` or `{colors.neutral.white}` based on state.
+- Badge: background `{colors.interaction.primary}`, text `{colors.neutral.white}`, type `{typography.highlight-xsmall}`, shape `{rounded.circle}`.
+- Layout: icon-only padding `{spacing.xs}`, badge offset uses `{spacing.xxxs}`.
+
 ### Price
 
-### Product Tiles
+**`price`** — Reusable price text subcomponent used inside product tiles, vendor cards, item rows, baskets, fees, and promotional surfaces. Supports default, discounted, struck-through, promo, Pro, delivery-fee, sold-out, and unit-price treatments.
+- Global: primary price text `{colors.neutral.primary}`, secondary price text `{colors.neutral.secondary}`, type `{typography.highlight-base}` or `{typography.title-small}` depending on component density
+- Default price: text `{colors.neutral.primary}`, type `{typography.highlight-base}`
+- Emphasised price: text `{colors.deal.price-emphasis}`, type `{typography.title-small}`
+- Discounted price: current price `{colors.interaction.primary}`, original price `{colors.neutral.secondary}` with strikethrough, promo text `{colors.interaction.primary}`, type `{typography.title-small}`
+- Pro price: text `{colors.pro.pro-deal-highlight-4}`, Pro tag background `{colors.pro.pro-deal-highlight-1}`, Pro tag text/icon `{colors.pro.on-pro-highlight}`, type `{typography.highlight-base}`
+- Delivery fee price: label and base text `{colors.neutral.secondary}`, discounted/free value `{colors.interaction.primary}`, original price `{colors.neutral.secondary}` with strikethrough, type `{typography.highlight-base}`
+- Unit price: price text `{colors.neutral.primary}`, unit suffix `{colors.neutral.secondary}`, type `{typography.highlight-small}`
+- Promo unit price: current price and unit suffix `{colors.interaction.primary}`, comparison price `{colors.neutral.secondary}`, type `{typography.highlight-small}`
+- Sold-out price: sold-out badge background `{colors.system.information-highlight}`, badge text `{colors.system.information}`, current price `{colors.neutral.primary}`, original price `{colors.neutral.secondary}` with strikethrough, badge shape `{rounded.pill}`, badge type `{typography.highlight-base}`
+- Struck-through price: text `{colors.neutral.secondary}` with strikethrough, used for original price, unavailable price, or replaced fee values
+- Inline price group: price-to-price spacing `{spacing.xs}`, icon-to-label spacing `{spacing.xxxs}` or `{spacing.xxs}`, icon stroke `{strokes.stroke-icon}`
+
+### Product Tiles 
+
+**`product-tile`** — Grid-based product or menu item tile used to browse purchasable items in restaurants, shops, groceries, and product collections. Supports multiple media sizes, add action overlay, price-led or name-led content hierarchy, supporting metadata, deposit text, and optional product tags.
+- Media: background `{colors.neutral.surface}`, shape `{rounded.media}`; placeholder icon uses `{colors.neutral.white}`
+- Add action: background `{colors.neutral.white}`, icon `{colors.neutral.primary}`, border `{colors.interaction.secondary-border}`, shape `{rounded.circle}`, stroke `{strokes.stroke-icon}`; elevated overlap action uses low elevation
+- Price: text `{colors.neutral.primary}`, type `{typography.highlight-base}`
+- Product name / dish name: text `{colors.neutral.primary}`, type `{typography.highlight-base}`
+- Supporting metadata: text `{colors.neutral.secondary}`, type `{typography.body-small}`
+- Deposit / secondary line: text `{colors.neutral.secondary}`, type `{typography.body-small}`
+- Featured tag: background `{colors.neutral.white}`, text/icon `{colors.neutral.primary}`, border `{colors.neutral.divider}`, shape `{rounded.pill}`, type `{typography.highlight-small}`
+- Dietary tags: vegan/vegetarian uses background `{colors.tag.tag-dietary-vegan-background}`, text/icon `{colors.tag.tag-dietary-vegan}`, shape `{rounded.circle}`; use equivalent dietary tag tokens when available
+- Layout: media-to-content gap `{spacing.xs}`, text stack gap `{spacing.xxxs}`, tag row gap `{spacing.xxs}`, tag row spacing from content `{spacing.xs}`
 
 ### Product Lists
 
+**`product-list`** — Row-based product item used to display purchasable items in menus, shops, groceries, or add-on lists. Supports image-leading, image-trailing, no-image, divider-separated, and contained card treatments, with an optional add action.
+- Container: background `{colors.neutral.white}`; card variant uses background `{colors.neutral.white}`, border `{colors.interaction.secondary-border}`, stroke `{strokes.stroke-interactive}`, shape `{rounded.container}`
+- Divider variant: divider `{colors.neutral.divider}`, stroke `{strokes.stroke-divider}`
+- Media: background `{colors.neutral.surface}`, shape `{rounded.container}`; placeholder icon uses `{colors.neutral.white}`
+- Title: text `{colors.neutral.primary}`, type `{typography.title-small}`
+- Subtitle: text `{colors.neutral.primary}`, type `{typography.body-base}`
+- Add action: background `{colors.neutral.white}`, icon `{colors.neutral.primary}`, border `{colors.interaction.secondary-border}`, shape `{rounded.circle}`, stroke `{strokes.stroke-icon}`; elevated image-overlap action uses low elevation
+- Layout: item padding `{spacing.sm}`, media-to-content gap `{spacing.st}`, title-to-subtitle gap `{spacing.xxs}`, content-to-action gap `{spacing.sm}`
+- Variants: image-leading places media before content; image-trailing places media after content; no-image removes the media slot while preserving content and action alignment
+
 ### Progress Steppers
+
+**`progress-stepper`** — Linear progress indicator used to show users their current position across a multi-step flow. Supports 3, 4, and 5-step layouts, with one active step and remaining inactive steps distributed evenly across the horizontal track.
+- Global: track `{colors.neutral.divider}`, track stroke `{strokes.stroke-navigation}`, step shape `{rounded.circle}`, step number type `{typography.highlight-base}`, label type `{typography.title-small}`
+- Layout: steps distributed evenly across the available width, step-to-label gap `{spacing.xs}`, label centred under each step
+- Active step: circle background `{colors.neutral.primary}`, number `{colors.neutral.white}`, label `{colors.neutral.primary}`
+- Inactive step: circle background `{colors.neutral.white}`, border `{colors.interaction.secondary-border}`, border stroke `{strokes.stroke-navigation}`, number `{colors.neutral.secondary}`, label `{colors.neutral.secondary}`
 
 ### Promo Banners
 
+**`promo-banner`** — Promotional content container for campaign, benefit, deal, or subscription messages. Used when short marketing content needs to combine text, CTA affordance, and optional media inside a tappable banner.
+- Container: default brand background `{colors.brand.primary}`, subtle background `{colors.brand.highlight}` or `{colors.deal.highlight-lvl1}`, Pro background `{colors.pro.pro-gradient-start}` → `{colors.pro.pro-gradient-end}` or `{colors.pro.pro-primary}`.
+- Text/icon: use `{colors.neutral.white}` on brand, deal, or Pro surfaces; use `{colors.neutral.primary}`, `{colors.deal.text-on-white}`, or `{colors.pro.on-pro-highlight}` on light surfaces.
+- Content: title `{typography.highlight-base}` or `{typography.title-small}` for larger banners, body `{typography.body-small}`, CTA/value text `{typography.highlight-small}`.
+- Media: optional illustration, image, or video slot uses `{rounded.media}`; media can be edge-aligned or omitted for text-only variants.
+- Shape: container `{rounded.container}`, pressed/tapped container `{rounded.container-pressed}`.
+- Stroke: no default stroke; use `{strokes.stroke-elevated}` only when the banner sits as an outlined or elevated surface.
+- Layout: internal padding `{spacing.sm}`, compact content gap `{spacing.xs}`, tight icon/text gap `{spacing.xxs}`, full-width placement uses horizontal page padding `{spacing.sm}`.
+
+### Sleeve Banners
+
+**`sleeve-banner`** — Slim promotional or informational banner that sits behind, above, or below a card surface. Used for compact messages with leading icon, label, and optional trailing info affordance. Available in default, Pro primary, and Pro subtle variants, with small/base and text/highlight typography options.
+- Default: background `{colors.interaction.secondary}`, pressed background `{colors.interaction.secondary-hover}`, text `{colors.neutral.white}`, icon `{colors.neutral.white}`.
+- Pro primary: background `{colors.pro.pro-gradient-start}` → `{colors.pro.pro-gradient-end}` or `{colors.pro.pro-deal-highlight-4}`, pressed background `{colors.pro.pro-primary}`, text `{colors.neutral.white}`, icon `{colors.neutral.white}`.
+- Pro subtle: background `{colors.pro.pro-deal-highlight-1}`, pressed background `{colors.pro.pro-deal-highlight-2}`, text `{colors.pro.on-pro-highlight}`, icon `{colors.pro.on-pro-highlight}`.
+- Typography: small text `{typography.body-small}`, small highlight `{typography.highlight-small}`, base text `{typography.body-base}`, base highlight `{typography.highlight-base}`.
+- Shape: container `{rounded.container-edge}` when attached behind a card; use `{rounded.container}` when displayed as a standalone sleeve.
+- Stroke: no default stroke; trailing info icon uses `{strokes.stroke-icon}`.
+- Layout: horizontal padding `{spacing.sm}`, vertical padding `{spacing.xs}`, icon-to-text gap `{spacing.xxs}`, trailing icon aligned to the end with content gap `{spacing.xs}`.
+
 ### Quantity Steppers
+
+**`quantity-stepper`** — Quantity control used to add, remove, or adjust item count. Supports add-only, decrement/increment, delete/increment, count badge, contained pill, split controls, and elevated/non-elevated variants.
+- Container: background `{colors.neutral.white}`, border `{colors.interaction.secondary-border}`, stroke `{strokes.stroke-interactive}`, shape `{rounded.pill}` for contained steppers and `{rounded.circle}` for single action buttons or count badges.
+- Elevated: `true` applies low elevation for floating controls over media or dark surfaces; `false` uses the same surface and border without shadow.
+- Icons: add, minus, and delete icons use `{colors.neutral.primary}` with stroke `{strokes.stroke-icon}`.
+- Count label: text `{colors.neutral.primary}`, type `{typography.highlight-base}`; compact count uses `{typography.highlight-small}`.
+- Count badge: background `{colors.interaction.secondary-selected}`, text `{colors.neutral.white}`, border `{colors.interaction.secondary-border}`, shape `{rounded.circle}`.
+- Add-only state: circular button with background `{colors.neutral.white}`, icon `{colors.neutral.primary}`, border `{colors.interaction.secondary-border}`.
+- Quantity `1` state: delete action replaces decrement action, with count label between delete and add actions.
+- Quantity `2+` state: minus action replaces delete action, with count label between minus and add actions.
+- Split variant: actions render as separate circular buttons with transparent spacing between controls; count remains text-only using `{colors.neutral.primary}`.
+- Layout: horizontal padding `{spacing.xs}` for contained steppers, action-to-count gap `{spacing.xs}`, compact internal gap `{spacing.xxs}`.
 
 ### Search
 
+**`search-input`** — Search field used for keyword entry in discovery, filtering, and browsing surfaces. Supports labelled and empty states, with icon-leading layout and pill-shaped container treatment.
+- Default: background `{colors.neutral.surface}`, icon `{colors.neutral.secondary}`, placeholder text `{colors.neutral.secondary}`, type `{typography.body-base}`
+- Reversed / elevated surface: background `{colors.neutral.white}`, icon `{colors.neutral.secondary}`, placeholder text `{colors.neutral.secondary}`, type `{typography.body-base}`
+- Focus state: focus ring `{colors.interaction.focus}`, stroke `{strokes.stroke-input-focus}`
+- Shape `{rounded.pill}`
+- Layout: horizontal padding `{spacing.sm}`, vertical padding `{spacing.xs}`, icon-to-text gap `{spacing.xs}`
+
 ### Radio Buttons
+
+**`radio-button`** — Single-select control used when users must choose one option from a mutually exclusive set. Supports icon-only and labelled variants, with unselected, selected, and disabled states.
+- Global: shape `{rounded.circle}`, border stroke `{strokes.stroke-interactive}`, inner selected indicator shape `{rounded.circle}`
+- Labelled variant: label `{colors.neutral.primary}`, label type `{typography.title-large}`, radio-to-label gap `{spacing.sm}`
+- Unselected: background `{colors.neutral.white}`, border `{colors.interaction.secondary-border}`
+- Selected: outer fill `{colors.neutral.primary}`, inner indicator `{colors.neutral.white}`
+- Disabled unselected: background `{colors.neutral.white}`, border `{colors.neutral.inactive}`, label `{colors.neutral.inactive}`
+- Disabled selected: outer fill `{colors.neutral.inactive}`, inner indicator `{colors.neutral.white}`, label `{colors.neutral.inactive}`
 
 ### Switches
 
-### Sliders
+**Global properties** — Shared structure for the switch/search-style control across label, stroke, and interaction variants. Used when users need a compact pill-shaped control with leading icon and optional dynamic label behaviour.
+- Shape `{rounded.pill}`, icon `{colors.neutral.secondary}`, icon stroke `{strokes.stroke-icon}`, label `{colors.neutral.secondary}`, label type `{typography.body-base}`.
+- Layout: horizontal padding `{spacing.sm}`, vertical padding `{spacing.xs}`, icon-to-label gap `{spacing.xs}`.
+- Leading icon: search icon uses `{colors.neutral.secondary}` across all variants.
+- Dynamic label: `none` shows fixed label, `as-a-whole` updates the full label at once, `letter-by-letter` updates the label progressively.
+
+**`switch-default`** — Default pill control without visible stroke. Used for low-emphasis selection or search-style input surfaces on standard backgrounds.
+- Default: background `{colors.neutral.surface}`, text `{colors.neutral.secondary}`, icon `{colors.neutral.secondary}`.
+- Pressed: background `{colors.neutral.divider}`, text `{colors.neutral.secondary}`, icon `{colors.neutral.secondary}`.
+
+**`switch-stroked`** — Stroked pill control used when the component needs stronger separation from the surrounding surface.
+- Default: background `{colors.neutral.white}`, border `{colors.interaction.secondary-border}`, stroke `{strokes.stroke-input}`, text `{colors.neutral.secondary}`, icon `{colors.neutral.secondary}`.
+- Pressed: background `{colors.neutral.white}`, border `{colors.interaction.secondary-border}`, stroke `{strokes.stroke-input}`, text `{colors.neutral.secondary}`, icon `{colors.neutral.secondary}`.
+
+**`switch-dynamic-label`** — Dynamic label variant used when the control label changes after interaction or reflects active input behaviour.
+- As a whole: label updates as one complete string, using `{typography.body-base}` and `{colors.neutral.secondary}`.
+- Letter by letter: label updates progressively, using `{typography.body-base}` and `{colors.neutral.secondary}`.
+- Empty state: icon-only visual state keeps leading icon `{colors.neutral.secondary}` with the same container treatment as the parent variant.
 
 ### Snackbars
 
-### Swipe Actions
+**`snackbar`** — Temporary feedback message shown near the bottom of the screen to confirm an action, surface a status, or provide contextual feedback. Supports single-line or multi-line content, optional leading icon, and optional CTA.
+- Surface background `{colors.neutral.primary}`, text `{colors.neutral.white}`, shape `{rounded.container}`, type `{typography.body-base}`
+- Icon: optional leading icon uses `{colors.neutral.white}` with stroke `{strokes.stroke-icon}`
+- CTA: optional outlined action uses text `{colors.neutral.white}`, border `{colors.neutral.white}`, stroke `{strokes.stroke-interactive}`, type `{typography.highlight-base}`, rounded `{rounded.button}`
+- Layout: horizontal padding `{spacing.sm}`, vertical padding `{spacing.st}`, icon-to-text gap `{spacing.sm}`, text-to-CTA gap `{spacing.sm}`; multi-line content expands vertically while keeping CTA aligned to the trailing or bottom-trailing edge.
 
 ### Tabs
 
@@ -658,12 +1645,96 @@ components:
 
 ### Tags
 
-### Text Fields
+**`tag`** — Compact label used to identify, group, or categorise items. Supports default, small, and extra-small sizes, with optional leading icon. Use default tags for higher-emphasis labels or when placed beside 24px-height components; use small tags as the standard compact label; use extra-small tags in dense cards, tiles, inline metadata, or constrained layouts.
+- Global: shape `{rounded.pill}`, icon stroke `{strokes.stroke-icon}`, icon-to-label gap `{spacing.xxxs}` or `{spacing.xxs}`
+- Default size: use for primary/focal tags, larger cards, or tags near 24px-height UI; label type `{typography.highlight-small}`, horizontal padding `{spacing.xs}`
+- Small size: default tag size for most product UI; label type `{typography.highlight-xsmall}`, horizontal padding `{spacing.xxs}`
+- Extra-small size: use in dense spaces such as product tiles, item cards, compact metadata, or inline tag rows; label type `{typography.highlight-xsmall}`, compact padding `{spacing.xxxs}` / `{spacing.xxs}`
+- Primary: background `{colors.tag.tag-primary-background}`, text `{colors.tag.tag-primary-text}`, icon `{colors.tag.tag-primary-text}`
+- Deal: background `{colors.tag.tag-deal-background}`, text `{colors.tag.tag-deal-text}`, icon `{colors.tag.tag-deal-text}`
+- Secondary: background `{colors.tag.tag-secondary-background}`, text `{colors.tag.tag-secondary-text}`, icon `{colors.tag.tag-secondary-text}`
+- Popular: background `{colors.tag.popular-highlight}`, text `{colors.tag.popular-tag-text}`, icon `{colors.tag.popular-tag-icon}`
+- Inactive: background `{colors.neutral.surface}`, text `{colors.neutral.inactive}`, icon `{colors.neutral.inactive}`
+- Neutral secondary: background `{colors.neutral.surface}`, text `{colors.neutral.secondary}`, icon `{colors.neutral.secondary}`
+- Neutral primary: background `{colors.neutral.primary}`, text `{colors.neutral.white}`, icon `{colors.neutral.white}`
+- Disclosure: background `{colors.neutral.secondary}`, text `{colors.neutral.white}`, icon `{colors.neutral.white}`
+- Information: background `{colors.system.information-highlight}`, text `{colors.system.information}`, icon `{colors.system.information}`
+- Error: background `{colors.system.error-highlight}`, text `{colors.system.error}`, icon `{colors.system.error}`
+- Success: background `{colors.system.success}`, text `{colors.tag.tag-success-text}`, icon `{colors.tag.tag-success-text}`
+- Pro: background `{colors.pro.pro-deal-highlight-4}`, text `{colors.neutral.white}`, icon `{colors.neutral.white}`
+- Pro light: background `{colors.pro.pro-deal-highlight-1}`, text `{colors.pro.on-pro-highlight}`, icon `{colors.pro.on-pro-highlight}`
+
+**`rating`** — Inline rating indicator used to show score and optional rating count. Use beside restaurant, vendor, product, or review metadata where rating needs to be compact and readable.
+- Icon `{colors.rating.ratings-rating}`, text `{colors.neutral.primary}`, secondary count text `{colors.neutral.secondary}`
+- Primary rating value type `{typography.highlight-xsmall}` or `{typography.highlight-small}` depending on size
+- Rating count type `{typography.body-xsmall}` or `{typography.body-small}` depending on size
+- Layout: icon-to-text gap `{spacing.xxxs}`, optional value-to-count gap `{spacing.xxxs}`
+
+**`dietary-tag`** — Dietary attribute label used to mark vegan, vegetarian, spicy, or kids meal options. Supports icon-only and icon-with-text variants across small and medium sizes.
+- Global: shape `{rounded.pill}`, icon stroke `{strokes.stroke-icon}`, icon-to-label gap `{spacing.xxxs}`, label type `{typography.highlight-xsmall}`
+- Icon-only small: compact dietary indicator for dense metadata rows or constrained card layouts
+- Icon-only medium: larger dietary indicator where the icon needs stronger visibility
+- Text variant: use when the dietary meaning must be explicit, such as menu item metadata or filterable attributes
+- Vegan: background `{colors.tag.tag-dietary-vegan-background}`, text `{colors.tag.tag-dietary-vegan}`, icon `{colors.tag.tag-dietary-vegan}`
+- Vegetarian: background `{colors.tag.tag-dietary-vegetarian-background}`, text `{colors.tag.tag-dietary-vegetarian}`, icon `{colors.tag.tag-dietary-vegetarian}`
+- Spicy: background `{colors.tag.tag-dietary-spicy-background}`, text `{colors.tag.tag-dietary-spicy}`, icon `{colors.tag.tag-dietary-spicy}`
+- Kids meal: background `{colors.tag.tag-dietary-kids-background}`, text `{colors.tag.tag-dietary-kids}`, icon `{colors.tag.tag-dietary-kids}`
+
+**`brand-tag`** — Logo-based pill used to display one or more partner, brand, or benefit logos inside a compact tag. Supports loading and loaded states, with 1–4 logos.
+- Global: background `{colors.neutral.white}`, border `{colors.neutral.divider}`, stroke `{strokes.stroke-interactive-subtle}`, shape `{rounded.pill}`
+- Loaded state: logo content sits inside the pill with compact horizontal spacing `{spacing.xxs}`
+- Loading state: skeleton background `{colors.neutral.surface}`, skeleton mark `{colors.neutral.inactive}`
+- Multi-logo variant: repeated logo marks use compact internal spacing `{spacing.xxxs}` or `{spacing.xxs}`
+
+**`transparent-tag`** — Surface-free metadata tag used when the label should read as inline supporting information instead of a visible pill. Best for low-emphasis metadata rows or contexts where a filled tag would add visual noise.
+- Background `{colors.neutral.transparent}`, text `{colors.neutral.primary}`, icon `{colors.neutral.primary}`, type `{typography.body-xsmall}` or `{typography.body-small}`
+- Layout: icon-to-label gap `{spacing.xxxs}`, no container border or fill
 
 ### Tooltips
 
+**`tooltip`** — Contextual overlay used to explain an element, provide short guidance, or clarify an interaction without changing the page state. Supports top, bottom, left, right, and edge-aligned pointer positions.
+- Surface background `{colors.system.information}`, text `{colors.neutral.white}`, type `{typography.highlight-base}`, shape `{rounded.overlay}`
+- Pointer uses the same background `{colors.system.information}` and should align to the triggering element.
+- Layout: horizontal padding `{spacing.sm}`, vertical padding `{spacing.xs}`, text-to-edge spacing follows compact overlay rhythm using `{spacing.xs}` or `{spacing.sm}`.
+
 ### Vendor List
+
+**`vendor-tile`** — Restaurant or shop listing tile used to preview a vendor in discovery surfaces such as home, search, category, cuisine, and vendor lists. It combines vendor media, branding, rating, delivery metadata, sponsored treatment, subscription benefit messaging, and deal tags.
+- Media: image uses `{rounded.media}`; favourite action uses background `{colors.neutral.white}`, icon `{colors.neutral.primary}`, shape `{rounded.circle}`, stroke `{strokes.stroke-icon}`
+- Vendor logo: background `{colors.neutral.white}`, border `{colors.neutral.divider}`, shape `{rounded.container}`
+- Title: text `{colors.neutral.primary}`, type `{typography.title-small}`
+- Metadata: text `{colors.neutral.secondary}`, type `{typography.body-base}`; metadata separators use `{colors.neutral.secondary}`
+- Rating: rating icon `{colors.rating.ratings-rating}`, rating text `{colors.neutral.primary}`, type `{typography.highlight-base}`
+- Delivery fee / supporting metadata: text `{colors.neutral.secondary}`, type `{typography.body-base}`
+- Sponsored label: background `{colors.overlay.dark-64}`, text `{colors.neutral.white}`, shape `{rounded.mini}`, type `{typography.highlight-small}`
+- Pro benefit banner: background `{colors.pro.pro-deal-highlight-1}`, text/icon `{colors.pro.pro-primary}`, type `{typography.highlight-base}`; compact `+1` indicator uses background `{colors.pro.pro-deal-highlight-2}`, text `{colors.pro.pro-primary}`, shape `{rounded.circle}`
+- Deal tags: background `{colors.deal.deal-highlight-lvl2}`, text/icon `{colors.deal.text-on-white}`, shape `{rounded.pill}`, type `{typography.highlight-base}`
+- Pro deal tag: background `{colors.pro.pro-deal-highlight-1}`, text/icon `{colors.pro.pro-primary}`, shape `{rounded.pill}`, type `{typography.highlight-base}`
+- Layout: image-to-content gap `{spacing.xs}`, title-to-metadata gap `{spacing.xxs}`, content-to-tag gap `{spacing.st}`, tag internal padding `{spacing.xxs} {spacing.st}`, tag gap `{spacing.xxs}`
 
 ### Vendor Tiles
 
+**`vendor-tile`** — Restaurant or shop listing tile used to preview a vendor in discovery surfaces such as home, search, category, cuisine, and vendor lists. It combines vendor media, branding, rating, delivery metadata, sponsored treatment, subscription benefit messaging, and deal tags.
+- Media: image uses `{rounded.media}`; favourite action uses background `{colors.neutral.white}`, icon `{colors.neutral.primary}`, shape `{rounded.circle}`, stroke `{strokes.stroke-icon}`
+- Vendor logo: background `{colors.neutral.white}`, border `{colors.neutral.divider}`, shape `{rounded.container}`
+- Title: text `{colors.neutral.primary}`, type `{typography.title-small}`
+- Metadata: text `{colors.neutral.secondary}`, type `{typography.body-base}`; metadata separators use `{colors.neutral.secondary}`
+- Rating: rating icon `{colors.rating.ratings-rating}`, rating text `{colors.neutral.primary}`, type `{typography.highlight-base}`
+- Delivery fee / supporting metadata: text `{colors.neutral.secondary}`, type `{typography.body-base}`
+- Sponsored label: background `{colors.overlay.dark-64}`, text `{colors.neutral.white}`, shape `{rounded.mini}`, type `{typography.highlight-small}`
+- Pro benefit banner: background `{colors.pro.pro-deal-highlight-1}`, text/icon `{colors.pro.pro-primary}`, type `{typography.highlight-base}`; compact `+1` indicator uses background `{colors.pro.pro-deal-highlight-2}`, text `{colors.pro.pro-primary}`, shape `{rounded.circle}`
+- Deal tags: background `{colors.deal.deal-highlight-lvl2}`, text/icon `{colors.deal.text-on-white}`, shape `{rounded.pill}`, type `{typography.highlight-base}`
+- Pro deal tag: background `{colors.pro.pro-deal-highlight-1}`, text/icon `{colors.pro.pro-primary}`, shape `{rounded.pill}`, type `{typography.highlight-base}`
+- Layout: image-to-content gap `{spacing.xs}`, title-to-metadata gap `{spacing.xxs}`, content-to-tag gap `{spacing.st}`, tag internal padding `{spacing.xxs} {spacing.st}`, tag gap `{spacing.xxs}`
+
 ### Walkthrough
+
+**`walkthrough`** — Guided overlay card used to introduce a feature, explain a UI element, or step users through contextual education. Supports top or bottom pointer placement, left/center/right pointer alignment, close action, primary CTA, and optional step count.
+- Container: background `{colors.neutral.white}`, text `{colors.neutral.primary}`, shape `{rounded.overlay}`, elevation `High`.
+- Title: text `{colors.neutral.primary}`, type `{typography.title-small}`.
+- Body: text `{colors.neutral.primary}`, type `{typography.body-base}`.
+- Close icon: icon `{colors.neutral.primary}`, stroke `{strokes.stroke-icon}`.
+- CTA: background `{colors.interaction.primary}`, text `{colors.neutral.white}`, shape `{rounded.button}`, type `{typography.highlight-base}`.
+- Step count: text `{colors.neutral.secondary}`, type `{typography.body-small}`.
+- Pointer: uses container background `{colors.neutral.white}` and can be positioned top-left, top-center, top-right, bottom-left, bottom-center, or bottom-right.
+- Layout: internal padding `{spacing.sm}`, title-to-body gap `{spacing.xs}`, body-to-footer gap `{spacing.sm}`, CTA aligned to end with footer spacing `{spacing.sm}`.
